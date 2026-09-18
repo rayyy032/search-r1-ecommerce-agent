@@ -1,23 +1,20 @@
-# Search-R1 Ecommerce Agent
+# Ecom Search-R1 · GRPO 训练的中文电商检索增强客服 Agent
 
-基于 GRPO 强化学习的搜索智能体：**Search-R1 复现 + 中文电商客服场景扩展**。
+用 **GRPO 强化学习**训练 Qwen3.5-4B，让模型在多轮对话中**自主决定何时搜索、搜什么、何时作答**，并输出**可溯源引用**——在自建的中文电商客服场景上，EM 从 41.9% 提升到 **91.6%**（多跳题 +74.4pp），且引用**零编造**。
 
-> **基于 [KMnO4-zx/agentic-rl-lab](https://github.com/KMnO4-zx/agentic-rl-lab)（Apache-2.0）中的 03-search-r1 实验。**
-> 本人完成了原实验的完整复现（Qwen3.5-4B + GRPO，PyTRIO 远端训练），并在此基础上扩展了中文电商客服场景：自建电商数据集、本地 Qdrant 向量检索后端、引用可溯源的复合奖励设计。
+**个人独立完成的核心工作**：
+
+- **场景改造**：将英文 Wikipedia 问答管线改造为中文电商客服——自建 36 篇虚构品牌商品文档 + 204/70 训练评测集（虚构品牌防止模型靠参数化知识"背答案"，逼它走检索）
+- **检索后端**：Qdrant 嵌入式向量库 + `BGE-small-zh-v1.5` 中文向量模型，检索结果带 Doc-ID 回显供模型引用
+- **奖励设计**：引用可溯源复合奖励（EM + 引用存在 + **引用真实检索校验** + gold 命中 − 搜索成本），从奖励层面抑制编造引用
+- **训练与双评测**：PyTRIO 远端 GRPO 20 步训练，Base vs Step-20 各 70 题 × 15 指标全量评测（原始记录见 `eval_result/`）
+- **管线验证**：先在 Wikipedia 场景完整跑通原实验作为改造前的正确性基线（EM 27.1%→31.4%，多跳 HotpotQA +20pp），确保后续电商场景的提升来自场景改造而非管线引入的偏差
+
+> 基于 [KMnO4-zx/agentic-rl-lab](https://github.com/KMnO4-zx/agentic-rl-lab)（Apache-2.0）的 03-search-r1 实验框架扩展；相对原仓库修改/新增的文件在目录结构中以 ★ 标注。
 
 ## 结果速览
 
-### Wikipedia 场景（复现原实验，Wikipedia 免费后端，70 题固定评测集）
-
-| 指标 | Base Model | RL Step-20 | 变化 |
-|---|---|---|---|
-| EM（宏平均） | 27.1% | **31.4%** | +4.3pp |
-| HotpotQA 子集 EM | 30.0% | **50.0%** | +20pp |
-| 2WikiMultiHopQA EM | 0.0% | **10.0%** | +10pp |
-| 格式合法率 | 50.0% | **70.0%** | +20pp |
-| 平均搜索次数 | 2.93 | 2.59 | 搜索更高效 |
-
-### 电商客服场景（本仓库扩展，本地 Qdrant 检索，70 题固定评测集）
+### 电商客服场景（核心工作，本地 Qdrant 检索，70 题固定评测集）
 
 | 指标 | Base Model | RL Step-20 | 变化 |
 |---|---|---|---|
@@ -33,13 +30,19 @@
 
 核心结论：RL 训练后模型学会了**多轮检索再作答**——多跳题（先查商品、再查政策）提升 +74.4pp，且**所有引用编号均真实来自检索结果**（零编造），格式 100% 合规。
 
+### Wikipedia 场景（改造前的管线验证基线，Wikipedia 免费后端，70 题固定评测集）
+
+| 指标 | Base Model | RL Step-20 | 变化 |
+|---|---|---|---|
+| EM（宏平均） | 27.1% | **31.4%** | +4.3pp |
+| HotpotQA 子集 EM | 30.0% | **50.0%** | +20pp |
+| 2WikiMultiHopQA EM | 0.0% | **10.0%** | +10pp |
+| 格式合法率 | 50.0% | **70.0%** | +20pp |
+| 平均搜索次数 | 2.93 | 2.59 | 搜索更高效 |
+
 ## 这个项目做了什么
 
-### 1. Search-R1 复现
-
-用 PyTRIO 对 Qwen3.5-4B 做 20 步 GRPO 训练：模型在多轮对话中自主决定**何时搜索、搜什么、何时给出最终答案**，以答案 Exact Match 作为奖励信号。训练后模型在多跳问答（HotpotQA）上提升显著。
-
-### 2. 中文电商客服场景扩展（核心增量）
+### 1. 中文电商客服场景改造（核心增量）
 
 原实验只有英文 Wikipedia 问答。本仓库将其改造为中文电商客服话术场景，解决的是真实客服 Agent 的两大痛点：**回答要有据可查（引用可溯源）、不能编造引用（防幻觉）**。
 
@@ -63,6 +66,10 @@ $$r = 1.0 \cdot \text{EM} + 0.1 \cdot \mathbb{1}[\text{有引用}] + 0.2 \cdot \
 - 用户模拟协议：中文电商咨询提问风格
 - 系统协议：要求先检索再回答，答案格式为 `Answer:` + `Source:` 两行
 
+### 2. Wikipedia 场景复现（改造前的管线验证）
+
+动手改造之前，先在原实验的 Wikipedia 场景上完整跑通 20 步 GRPO 训练 + 双评测，确认训练/评测管线行为与原实验一致（多跳 HotpotQA +20pp）。这一步保证后续电商场景的提升来自场景改造本身，而不是管线改动引入的偏差——也是换检索后端（Wikipedia API → 本地 Qdrant）、换奖励函数（EM → 复合奖励）时的对照锚点。
+
 ## 目录结构
 
 ```
@@ -75,13 +82,16 @@ $$r = 1.0 \cdot \text{EM} + 0.1 \cdot \mathbb{1}[\text{有引用}] + 0.2 \cdot \
 ├── data.py             # 数据加载（含 gold_docs 字段）★
 ├── prepare_data.py     # Wikipedia 数据准备（原始 lab 既有）
 ├── analyse.py          # 评测结果分析（原始 lab 既有）
+├── plot_curves.py      # 从训练日志重绘训练曲线（本 README 图表可复现）★
 ├── ecommerce/
 │   ├── build_data.py   # 电商文档库 + 训练/评测集生成 ★
 │   └── index_qdrant.py # BGE 向量化入库本地 Qdrant ★
 ├── datasets/
 │   └── ecommerce/      # 电商文档与训练/评测数据（train 204 / dev 70）
 ├── eval_result/        # 全部评测原始记录（JSONL，可复查逐题结果）
-└── docs/               # 原 lab 教程文档与配图（路径以本仓库根目录为准）
+└── docs/
+    ├── images/         # 训练曲线图（由 plot_curves.py 生成）等配图
+    └── training_data/  # 从训练日志提取的逐步指标（图表数据源，与 SwanLab 同源）
 ```
 
 标 ★ 的文件相对原仓库做了场景扩展修改；未标注的为原仓库代码。
@@ -101,7 +111,7 @@ uv sync
 cp .env.example .env
 ```
 
-### 电商场景（本仓库扩展）
+### 电商场景（核心工作）
 
 ```bash
 # 1.（可选）重建数据集——仓库已附带 datasets/ecommerce/，可跳过
@@ -129,7 +139,7 @@ uv run python eval.py --search-backend ecommerce \
     --output eval_result/ecom_eval_step20.jsonl
 ```
 
-### Wikipedia 场景（复现原实验）
+### Wikipedia 场景（管线验证基线）
 
 ```bash
 # 1. 准备数据（下载 wiki dump 并生成 train/dev/test，详见 docs/lab-readme.md）
@@ -160,8 +170,27 @@ uv run python eval.py --search-backend wikipedia \
 
 ## 训练曲线
 
-- 电商场景：[SwanLab - ecom-r1-20step](https://swanlab.cn/@rickena/agentic-rl-lab-search-r1)
-- Wiki 复现：同项目下 `search-r1-baseline-2` 等 run
+图表由 [`plot_curves.py`](plot_curves.py) 从训练日志提取的逐步指标重绘（数据与 SwanLab 云端同源，可复现）。
+
+### 电商场景（ecom-r1-20step-4）
+
+![电商场景 GRPO 训练曲线](docs/images/curves-ecom.png)
+
+- **正确率**：step 2 短暂触底 9.4%（首次策略更新后的格式震荡）后快速爬升，step 9 起稳定在 85%–100% 区间，step 20 收敛至 100%
+- **奖励**：收敛到 ~1.43，贴近复合奖励的理论上限（1.0 EM + 0.5 引用项 − 搜索成本），说明各奖励分量同时被满足
+- **搜索次数**：稳定在 1.4 次/题附近——搜索成本惩罚生效，单跳题不过度搜索，多跳题自动补搜
+- 2 个 step 的 loss 显示为跳过：该步全组零方差（全对/全错），被 Dynamic Sampling 机制跳过，不产生梯度
+
+### Wikipedia 基线（search-r1-baseline-2，改造前管线验证）
+
+![Wikipedia 基线 GRPO 训练曲线](docs/images/curves-baseline.png)
+
+- 训练信号方向正确（奖励 0.03 → 0.5+），但组级方差大：每步仅 64 条 rollout，Wikipedia 多跳任务对 4B 模型难度高，逐步正确率在 6%–58% 间震荡
+- 因此最终成绩以 70 题固定评测集的双评测为准（EM 27.1%→31.4%），而非训练期滚动指标
+
+**在线曲线**（含完整超参配置与更多指标面板）：
+- 电商 run：[SwanLab · ecom-r1-20step-4](https://swanlab.cn/@rickena/agentic-rl-lab-search-r1/runs/cze9su7x)
+- Wiki 基线 run：[SwanLab · search-r1-baseline-2](https://swanlab.cn/@rickena/agentic-rl-lab-search-r1/runs/pjirsjub)
 
 ## 致谢与许可
 

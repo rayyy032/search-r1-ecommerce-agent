@@ -1,0 +1,204 @@
+{"id": "ecom_0005", "question": "青岚T2旗舰版的售价是多少？", "answers": ["2099", "2099元"], "data_source": "ecommerce_single", "gold_docs": ["P002"]}
+{"id": "ecom_0198", "question": "墨羽W1Pro和青岚W2旗舰版哪个洗涤容量更大？", "answers": ["青岚W2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P006", "P007"]}
+{"id": "ecom_0178", "question": "青岚T2旗舰版和沐光T3Max哪个售价更便宜？", "answers": ["青岚T2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P002", "P003"]}
+{"id": "ecom_0011", "question": "沐光T3Max的电池容量是多少？", "answers": ["5300", "5300mAh", "5300毫安时"], "data_source": "ecommerce_single", "gold_docs": ["P003"]}
+{"id": "ecom_0006", "question": "青岚T2旗舰版的电池容量是多少？", "answers": ["4300毫安时", "4300mAh", "4300"], "data_source": "ecommerce_single", "gold_docs": ["P002"]}
+{"id": "ecom_0259", "question": "蓝曜E1Pro和沐光E2旗舰版哪个总续航更长？", "answers": ["沐光E2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P021", "P022"]}
+{"id": "ecom_0229", "question": "青岚A4SE和赤焰A3Max哪个售价更便宜？", "answers": ["青岚A4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P014", "P013"]}
+{"id": "ecom_0255", "question": "赤焰E3Max和蓝曜E1Pro哪个降噪深度更高？", "answers": ["蓝曜E1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P023", "P021"]}
+{"id": "ecom_0089", "question": "墨羽L5青春版的续航时间是多少？", "answers": ["14", "14小时"], "data_source": "ecommerce_single", "gold_docs": ["P020"]}
+{"id": "ecom_0081", "question": "青岚L3Max的售价是多少？", "answers": ["9499元", "9499"], "data_source": "ecommerce_single", "gold_docs": ["P018"]}
+{"id": "ecom_0043", "question": "蓝曜W4SE支持空气洗吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P009"]}
+{"id": "ecom_0026", "question": "墨羽W1Pro的洗涤容量是多少？", "answers": ["8", "8kg"], "data_source": "ecommerce_single", "gold_docs": ["P006"]}
+{"id": "ecom_0077", "question": "蓝曜L1Pro的续航时间是多少？", "answers": ["12", "12小时"], "data_source": "ecommerce_single", "gold_docs": ["P016"]}
+{"id": "ecom_0217", "question": "云穗A2旗舰版和墨羽A5青春版哪个APF 能效比更高？", "answers": ["墨羽A5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P012", "P015"]}
+{"id": "ecom_0034", "question": "青岚W2旗舰版支持洗烘一体吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P007"]}
+{"id": "ecom_0192", "question": "蓝曜T5青春版和沐光T3Max哪个重量更轻？", "answers": ["蓝曜T5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P005", "P003"]}
+{"id": "ecom_0094", "question": "沐光E2旗舰版的售价是多少？", "answers": ["899", "899元"], "data_source": "ecommerce_single", "gold_docs": ["P022"]}
+{"id": "ecom_0091", "question": "蓝曜E1Pro的降噪深度是多少？", "answers": ["40", "40dB"], "data_source": "ecommerce_single", "gold_docs": ["P021"]}
+{"id": "ecom_0154", "question": "购买延保服务后，赤焰L4SE的整机保修总时长是多久？", "answers": ["3年", "3"], "data_source": "ecommerce_multihop", "gold_docs": ["P019", "S004"]}
+{"id": "ecom_0111", "question": "蓝曜R2青春版的售价是多少？", "answers": ["1999元", "1999"], "data_source": "ecommerce_single", "gold_docs": ["P026"]}
+{"id": "ecom_0144", "question": "购买延保服务后，蓝曜W4SE的整机保修总时长是多久？", "answers": ["4年", "4"], "data_source": "ecommerce_multihop", "gold_docs": ["P009", "S004"]}
+{"id": "ecom_0214", "question": "墨羽W1Pro和赤焰W3Max哪个售价更便宜？", "answers": ["墨羽W1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P006", "P008"]}
+{"id": "ecom_0244", "question": "沐光L2旗舰版和蓝曜L1Pro哪个重量更轻？", "answers": ["沐光L2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P017", "P016"]}
+{"id": "ecom_0100", "question": "赤焰E3Max的总续航是多少？", "answers": ["34小时", "34"], "data_source": "ecommerce_single", "gold_docs": ["P023"]}
+{"id": "ecom_0070", "question": "墨羽A5青春版的售价是多少？", "answers": ["7799", "7799元"], "data_source": "ecommerce_single", "gold_docs": ["P015"]}
+{"id": "ecom_0085", "question": "赤焰L4SE的内存是多少？", "answers": ["8", "8GB"], "data_source": "ecommerce_single", "gold_docs": ["P019"]}
+{"id": "ecom_0120", "question": "青岚R3Pro支持自动集尘吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P027"]}
+{"id": "ecom_0160", "question": "购买延保服务后，赤焰R1SE的整机保修总时长是多久？", "answers": ["3年", "3"], "data_source": "ecommerce_multihop", "gold_docs": ["P025", "S004"]}
+{"id": "ecom_0083", "question": "青岚L3Max的续航时间是多少？", "answers": ["8", "8小时"], "data_source": "ecommerce_single", "gold_docs": ["P018"]}
+{"id": "ecom_0078", "question": "沐光L2旗舰版的售价是多少？", "answers": ["4799元", "4799"], "data_source": "ecommerce_single", "gold_docs": ["P017"]}
+{"id": "ecom_0038", "question": "赤焰W3Max支持空气洗吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P008"]}
+{"id": "ecom_0219", "question": "云穗A2旗舰版和赤焰A3Max哪个APF 能效比更高？", "answers": ["赤焰A3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P012", "P013"]}
+{"id": "ecom_0069", "question": "青岚A4SE支持新风功能吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P014"]}
+{"id": "ecom_0056", "question": "云穗A2旗舰版的匹数是多少？", "answers": ["2.0匹", "2.0"], "data_source": "ecommerce_single", "gold_docs": ["P012"]}
+{"id": "ecom_0267", "question": "云穗R4旗舰版和蓝曜R2青春版哪个吸力更大？", "answers": ["蓝曜R2青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P028", "P026"]}
+{"id": "ecom_0036", "question": "赤焰W3Max的洗涤容量是多少？", "answers": ["9", "9kg"], "data_source": "ecommerce_single", "gold_docs": ["P008"]}
+{"id": "ecom_0232", "question": "云穗A2旗舰版和墨羽A5青春版哪个售价更便宜？", "answers": ["云穗A2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P012", "P015"]}
+{"id": "ecom_0031", "question": "青岚W2旗舰版的洗涤容量是多少？", "answers": ["10", "10kg"], "data_source": "ecommerce_single", "gold_docs": ["P007"]}
+{"id": "ecom_0246", "question": "墨羽L5青春版和青岚L3Max哪个重量更轻？", "answers": ["墨羽L5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P020", "P018"]}
+{"id": "ecom_0044", "question": "蓝曜W4SE支持洗烘一体吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P009"]}
+{"id": "ecom_0016", "question": "墨羽T4SE的电池容量是多少？", "answers": ["5400mAh", "5400", "5400毫安时"], "data_source": "ecommerce_single", "gold_docs": ["P004"]}
+{"id": "ecom_0152", "question": "购买延保服务后，沐光L2旗舰版的整机保修总时长是多久？", "answers": ["3年", "3"], "data_source": "ecommerce_multihop", "gold_docs": ["P017", "S004"]}
+{"id": "ecom_0064", "question": "赤焰A3Max支持新风功能吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P013"]}
+{"id": "ecom_0205", "question": "云穗W5青春版和蓝曜W4SE哪个洗涤容量更大？", "answers": ["蓝曜W4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P010", "P009"]}
+{"id": "ecom_0068", "question": "青岚A4SE支持自清洁吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P014"]}
+{"id": "ecom_0227", "question": "蓝曜A1Pro和墨羽A5青春版哪个售价更便宜？", "answers": ["蓝曜A1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P011", "P015"]}
+{"id": "ecom_0155", "question": "购买延保服务后，墨羽L5青春版的整机保修总时长是多久？", "answers": ["3年", "3"], "data_source": "ecommerce_multihop", "gold_docs": ["P020", "S004"]}
+{"id": "ecom_0072", "question": "墨羽A5青春版的APF 能效比是什么？", "answers": ["4.0"], "data_source": "ecommerce_single", "gold_docs": ["P015"]}
+{"id": "ecom_0079", "question": "沐光L2旗舰版的内存是多少？", "answers": ["32", "32GB"], "data_source": "ecommerce_single", "gold_docs": ["P017"]}
+{"id": "ecom_0261", "question": "赤焰E3Max和沐光E2旗舰版哪个总续航更长？", "answers": ["沐光E2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P023", "P022"]}
+{"id": "ecom_0254", "question": "沐光E2旗舰版和青岚E4SE哪个降噪深度更高？", "answers": ["青岚E4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P022", "P024"]}
+{"id": "ecom_0009", "question": "青岚T2旗舰版的防水等级是什么？", "answers": ["生活防水"], "data_source": "ecommerce_single", "gold_docs": ["P002"]}
+{"id": "ecom_0271", "question": "蓝曜R2青春版和青岚R3Pro哪个售价更便宜？", "answers": ["蓝曜R2青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P026", "P027"]}
+{"id": "ecom_0096", "question": "沐光E2旗舰版的总续航是多少？", "answers": ["40", "40小时"], "data_source": "ecommerce_single", "gold_docs": ["P022"]}
+{"id": "ecom_0194", "question": "墨羽T4SE和沐光T3Max哪个重量更轻？", "answers": ["墨羽T4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P004", "P003"]}
+{"id": "ecom_0150", "question": "购买延保服务后，墨羽A5青春版的整机保修总时长是多久？", "answers": ["7年", "7"], "data_source": "ecommerce_multihop", "gold_docs": ["P015", "S004"]}
+{"id": "ecom_0249", "question": "青岚L3Max和蓝曜L1Pro哪个重量更轻？", "answers": ["青岚L3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P018", "P016"]}
+{"id": "ecom_0076", "question": "蓝曜L1Pro的内存是多少？", "answers": ["32", "32GB"], "data_source": "ecommerce_single", "gold_docs": ["P016"]}
+{"id": "ecom_0235", "question": "青岚L3Max和赤焰L4SE哪个续航更长？", "answers": ["赤焰L4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P018", "P019"]}
+{"id": "ecom_0101", "question": "赤焰E3Max的防水等级是什么？", "answers": ["IPX4"], "data_source": "ecommerce_single", "gold_docs": ["P023"]}
+{"id": "ecom_0239", "question": "蓝曜L1Pro和墨羽L5青春版哪个续航更长？", "answers": ["墨羽L5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P016", "P020"]}
+{"id": "ecom_0262", "question": "青岚E4SE和沐光E2旗舰版哪个总续航更长？", "answers": ["沐光E2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P024", "P022"]}
+{"id": "ecom_0151", "question": "购买延保服务后，蓝曜L1Pro的整机保修总时长是多久？", "answers": ["3年", "3"], "data_source": "ecommerce_multihop", "gold_docs": ["P016", "S004"]}
+{"id": "ecom_0052", "question": "蓝曜A1Pro的APF 能效比是什么？", "answers": ["5.0"], "data_source": "ecommerce_single", "gold_docs": ["P011"]}
+{"id": "ecom_0066", "question": "青岚A4SE的匹数是多少？", "answers": ["2.0匹", "2.0"], "data_source": "ecommerce_single", "gold_docs": ["P014"]}
+{"id": "ecom_0157", "question": "购买延保服务后，沐光E2旗舰版的整机保修总时长是多久？", "answers": ["2年", "2"], "data_source": "ecommerce_multihop", "gold_docs": ["P022", "S004"]}
+{"id": "ecom_0133", "question": "现货商品付款后多久发货？", "answers": ["48小时"], "data_source": "ecommerce_policy", "gold_docs": ["S006"]}
+{"id": "ecom_0107", "question": "赤焰R1SE的吸力是多少？", "answers": ["4000", "4000Pa"], "data_source": "ecommerce_single", "gold_docs": ["P025"]}
+{"id": "ecom_0247", "question": "墨羽L5青春版和蓝曜L1Pro哪个重量更轻？", "answers": ["墨羽L5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P020", "P016"]}
+{"id": "ecom_0257", "question": "蓝曜E1Pro和赤焰E3Max哪个总续航更长？", "answers": ["赤焰E3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P021", "P023"]}
+{"id": "ecom_0193", "question": "蓝曜T5青春版和青岚T2旗舰版哪个重量更轻？", "answers": ["蓝曜T5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P005", "P002"]}
+{"id": "ecom_0030", "question": "青岚W2旗舰版的售价是多少？", "answers": ["5599", "5599元"], "data_source": "ecommerce_single", "gold_docs": ["P007"]}
+{"id": "ecom_0208", "question": "蓝曜W4SE和青岚W2旗舰版哪个售价更便宜？", "answers": ["蓝曜W4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P009", "P007"]}
+{"id": "ecom_0183", "question": "沐光T3Max和赤焰T1Pro哪个售价更便宜？", "answers": ["沐光T3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P003", "P001"]}
+{"id": "ecom_0145", "question": "购买延保服务后，云穗W5青春版的整机保修总时长是多久？", "answers": ["4年", "4"], "data_source": "ecommerce_multihop", "gold_docs": ["P010", "S004"]}
+{"id": "ecom_0248", "question": "墨羽L5青春版和赤焰L4SE哪个重量更轻？", "answers": ["墨羽L5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P020", "P019"]}
+{"id": "ecom_0047", "question": "云穗W5青春版的洗涤噪音是多少？", "answers": ["53dB", "53"], "data_source": "ecommerce_single", "gold_docs": ["P010"]}
+{"id": "ecom_0020", "question": "蓝曜T5青春版的售价是多少？", "answers": ["3299元", "3299"], "data_source": "ecommerce_single", "gold_docs": ["P005"]}
+{"id": "ecom_0130", "question": "购买延长保修服务需要多少钱？", "answers": ["199元", "199"], "data_source": "ecommerce_policy", "gold_docs": ["S004"]}
+{"id": "ecom_0156", "question": "购买延保服务后，蓝曜E1Pro的整机保修总时长是多久？", "answers": ["2年", "2"], "data_source": "ecommerce_multihop", "gold_docs": ["P021", "S004"]}
+{"id": "ecom_0040", "question": "蓝曜W4SE的售价是多少？", "answers": ["2199", "2199元"], "data_source": "ecommerce_single", "gold_docs": ["P009"]}
+{"id": "ecom_0272", "question": "蓝曜R2青春版和赤焰R1SE哪个售价更便宜？", "answers": ["蓝曜R2青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P026", "P025"]}
+{"id": "ecom_0128", "question": "有运费险的订单退换货，首重运费谁承担？", "answers": ["平台承担", "平台"], "data_source": "ecommerce_policy", "gold_docs": ["S001", "S002"]}
+{"id": "ecom_0122", "question": "云穗R4旗舰版的吸力是多少？", "answers": ["6000Pa", "6000"], "data_source": "ecommerce_single", "gold_docs": ["P028"]}
+{"id": "ecom_0149", "question": "购买延保服务后，青岚A4SE的整机保修总时长是多久？", "answers": ["7年", "7"], "data_source": "ecommerce_multihop", "gold_docs": ["P014", "S004"]}
+{"id": "ecom_0188", "question": "赤焰T1Pro和墨羽T4SE哪个重量更轻？", "answers": ["赤焰T1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P001", "P004"]}
+{"id": "ecom_0251", "question": "蓝曜L1Pro和赤焰L4SE哪个重量更轻？", "answers": ["蓝曜L1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P016", "P019"]}
+{"id": "ecom_0080", "question": "沐光L2旗舰版的续航时间是多少？", "answers": ["13小时", "13"], "data_source": "ecommerce_single", "gold_docs": ["P017"]}
+{"id": "ecom_0176", "question": "沐光T3Max和墨羽T4SE哪个电池容量更大？", "answers": ["墨羽T4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P003", "P004"]}
+{"id": "ecom_0207", "question": "蓝曜W4SE和墨羽W1Pro哪个售价更便宜？", "answers": ["蓝曜W4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P009", "P006"]}
+{"id": "ecom_0148", "question": "购买延保服务后，赤焰A3Max的整机保修总时长是多久？", "answers": ["7年", "7"], "data_source": "ecommerce_multihop", "gold_docs": ["P013", "S004"]}
+{"id": "ecom_0014", "question": "沐光T3Max的防水等级是什么？", "answers": ["IP68"], "data_source": "ecommerce_single", "gold_docs": ["P003"]}
+{"id": "ecom_0055", "question": "云穗A2旗舰版的售价是多少？", "answers": ["6499", "6499元"], "data_source": "ecommerce_single", "gold_docs": ["P012"]}
+{"id": "ecom_0075", "question": "蓝曜L1Pro的售价是多少？", "answers": ["9699元", "9699"], "data_source": "ecommerce_single", "gold_docs": ["P016"]}
+{"id": "ecom_0201", "question": "赤焰W3Max和青岚W2旗舰版哪个洗涤容量更大？", "answers": ["青岚W2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P008", "P007"]}
+{"id": "ecom_0039", "question": "赤焰W3Max支持洗烘一体吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P008"]}
+{"id": "ecom_0180", "question": "青岚T2旗舰版和赤焰T1Pro哪个售价更便宜？", "answers": ["青岚T2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P002", "P001"]}
+{"id": "ecom_0142", "question": "购买延保服务后，青岚W2旗舰版的整机保修总时长是多久？", "answers": ["4年", "4"], "data_source": "ecommerce_multihop", "gold_docs": ["P007", "S004"]}
+{"id": "ecom_0197", "question": "墨羽W1Pro和赤焰W3Max哪个洗涤容量更大？", "answers": ["赤焰W3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P006", "P008"]}
+{"id": "ecom_0073", "question": "墨羽A5青春版支持自清洁吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P015"]}
+{"id": "ecom_0116", "question": "青岚R3Pro的售价是多少？", "answers": ["2799元", "2799"], "data_source": "ecommerce_single", "gold_docs": ["P027"]}
+{"id": "ecom_0067", "question": "青岚A4SE的APF 能效比是什么？", "answers": ["4.0"], "data_source": "ecommerce_single", "gold_docs": ["P014"]}
+{"id": "ecom_0099", "question": "赤焰E3Max的降噪深度是多少？", "answers": ["32", "32dB"], "data_source": "ecommerce_single", "gold_docs": ["P023"]}
+{"id": "ecom_0000", "question": "赤焰T1Pro的售价是多少？", "answers": ["3499", "3499元"], "data_source": "ecommerce_single", "gold_docs": ["P001"]}
+{"id": "ecom_0097", "question": "沐光E2旗舰版的防水等级是什么？", "answers": ["IPX7"], "data_source": "ecommerce_single", "gold_docs": ["P022"]}
+{"id": "ecom_0182", "question": "沐光T3Max和蓝曜T5青春版哪个售价更便宜？", "answers": ["沐光T3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P003", "P005"]}
+{"id": "ecom_0209", "question": "蓝曜W4SE和赤焰W3Max哪个售价更便宜？", "answers": ["蓝曜W4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P009", "P008"]}
+{"id": "ecom_0268", "question": "云穗R4旗舰版和蓝曜R2青春版哪个售价更便宜？", "answers": ["云穗R4旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P028", "P026"]}
+{"id": "ecom_0237", "question": "青岚L3Max和墨羽L5青春版哪个续航更长？", "answers": ["墨羽L5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P018", "P020"]}
+{"id": "ecom_0123", "question": "云穗R4旗舰版的电池容量是多少？", "answers": ["4000毫安时", "4000", "4000mAh"], "data_source": "ecommerce_single", "gold_docs": ["P028"]}
+{"id": "ecom_0238", "question": "蓝曜L1Pro和沐光L2旗舰版哪个续航更长？", "answers": ["沐光L2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P016", "P017"]}
+{"id": "ecom_0233", "question": "赤焰A3Max和墨羽A5青春版哪个售价更便宜？", "answers": ["赤焰A3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P013", "P015"]}
+{"id": "ecom_0042", "question": "蓝曜W4SE的洗涤噪音是多少？", "answers": ["50dB", "50"], "data_source": "ecommerce_single", "gold_docs": ["P009"]}
+{"id": "ecom_0241", "question": "赤焰L4SE和墨羽L5青春版哪个续航更长？", "answers": ["墨羽L5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P019", "P020"]}
+{"id": "ecom_0023", "question": "蓝曜T5青春版支持无线充电吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P005"]}
+{"id": "ecom_0003", "question": "赤焰T1Pro支持无线充电吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P001"]}
+{"id": "ecom_0236", "question": "青岚L3Max和沐光L2旗舰版哪个续航更长？", "answers": ["沐光L2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P018", "P017"]}
+{"id": "ecom_0166", "question": "沐光T3Max激活之后还能七天无理由退货吗？", "answers": ["不能", "不支持"], "data_source": "ecommerce_multihop", "gold_docs": ["P003", "S001"]}
+{"id": "ecom_0012", "question": "沐光T3Max的有线快充功率是多少？", "answers": ["120W", "120"], "data_source": "ecommerce_single", "gold_docs": ["P003"]}
+{"id": "ecom_0210", "question": "云穗W5青春版和墨羽W1Pro哪个售价更便宜？", "answers": ["云穗W5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P010", "P006"]}
+{"id": "ecom_0140", "question": "购买延保服务后，蓝曜T5青春版的整机保修总时长是多久？", "answers": ["2年", "2"], "data_source": "ecommerce_multihop", "gold_docs": ["P005", "S004"]}
+{"id": "ecom_0113", "question": "蓝曜R2青春版的电池容量是多少？", "answers": ["5000毫安时", "5000mAh", "5000"], "data_source": "ecommerce_single", "gold_docs": ["P026"]}
+{"id": "ecom_0019", "question": "墨羽T4SE的防水等级是什么？", "answers": ["IP68"], "data_source": "ecommerce_single", "gold_docs": ["P004"]}
+{"id": "ecom_0203", "question": "赤焰W3Max和蓝曜W4SE哪个洗涤容量更大？", "answers": ["蓝曜W4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P008", "P009"]}
+{"id": "ecom_0118", "question": "青岚R3Pro的电池容量是多少？", "answers": ["3600mAh", "3600", "3600毫安时"], "data_source": "ecommerce_single", "gold_docs": ["P027"]}
+{"id": "ecom_0240", "question": "赤焰L4SE和沐光L2旗舰版哪个续航更长？", "answers": ["沐光L2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P019", "P017"]}
+{"id": "ecom_0046", "question": "云穗W5青春版的洗涤容量是多少？", "answers": ["10", "10kg"], "data_source": "ecommerce_single", "gold_docs": ["P010"]}
+{"id": "ecom_0218", "question": "云穗A2旗舰版和蓝曜A1Pro哪个APF 能效比更高？", "answers": ["蓝曜A1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P012", "P011"]}
+{"id": "ecom_0035", "question": "赤焰W3Max的售价是多少？", "answers": ["5799元", "5799"], "data_source": "ecommerce_single", "gold_docs": ["P008"]}
+{"id": "ecom_0114", "question": "蓝曜R2青春版的避障方式是什么？", "answers": ["激光避障"], "data_source": "ecommerce_single", "gold_docs": ["P026"]}
+{"id": "ecom_0137", "question": "购买延保服务后，青岚T2旗舰版的整机保修总时长是多久？", "answers": ["2年", "2"], "data_source": "ecommerce_multihop", "gold_docs": ["P002", "S004"]}
+{"id": "ecom_0264", "question": "赤焰R1SE和蓝曜R2青春版哪个吸力更大？", "answers": ["蓝曜R2青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P025", "P026"]}
+{"id": "ecom_0049", "question": "云穗W5青春版支持洗烘一体吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P010"]}
+{"id": "ecom_0063", "question": "赤焰A3Max支持自清洁吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P013"]}
+{"id": "ecom_0027", "question": "墨羽W1Pro的洗涤噪音是多少？", "answers": ["54", "54dB"], "data_source": "ecommerce_single", "gold_docs": ["P006"]}
+{"id": "ecom_0266", "question": "青岚R3Pro和蓝曜R2青春版哪个吸力更大？", "answers": ["蓝曜R2青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P027", "P026"]}
+{"id": "ecom_0086", "question": "赤焰L4SE的续航时间是多少？", "answers": ["12", "12小时"], "data_source": "ecommerce_single", "gold_docs": ["P019"]}
+{"id": "ecom_0215", "question": "青岚W2旗舰版和赤焰W3Max哪个售价更便宜？", "answers": ["青岚W2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P007", "P008"]}
+{"id": "ecom_0103", "question": "青岚E4SE的降噪深度是多少？", "answers": ["40", "40dB"], "data_source": "ecommerce_single", "gold_docs": ["P024"]}
+{"id": "ecom_0250", "question": "青岚L3Max和赤焰L4SE哪个重量更轻？", "answers": ["青岚L3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P018", "P019"]}
+{"id": "ecom_0025", "question": "墨羽W1Pro的售价是多少？", "answers": ["4999元", "4999"], "data_source": "ecommerce_single", "gold_docs": ["P006"]}
+{"id": "ecom_0165", "question": "青岚T2旗舰版激活之后还能七天无理由退货吗？", "answers": ["不能", "不支持"], "data_source": "ecommerce_multihop", "gold_docs": ["P002", "S001"]}
+{"id": "ecom_0167", "question": "墨羽T4SE激活之后还能七天无理由退货吗？", "answers": ["不能", "不支持"], "data_source": "ecommerce_multihop", "gold_docs": ["P004", "S001"]}
+{"id": "ecom_0172", "question": "青岚T2旗舰版和蓝曜T5青春版哪个电池容量更大？", "answers": ["蓝曜T5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P002", "P005"]}
+{"id": "ecom_0013", "question": "沐光T3Max支持无线充电吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P003"]}
+{"id": "ecom_0186", "question": "蓝曜T5青春版和墨羽T4SE哪个售价更便宜？", "answers": ["蓝曜T5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P005", "P004"]}
+{"id": "ecom_0119", "question": "青岚R3Pro的避障方式是什么？", "answers": ["机械避障"], "data_source": "ecommerce_single", "gold_docs": ["P027"]}
+{"id": "ecom_0105", "question": "青岚E4SE的防水等级是什么？", "answers": ["IPX7"], "data_source": "ecommerce_single", "gold_docs": ["P024"]}
+{"id": "ecom_0269", "question": "云穗R4旗舰版和青岚R3Pro哪个售价更便宜？", "answers": ["云穗R4旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P028", "P027"]}
+{"id": "ecom_0090", "question": "蓝曜E1Pro的售价是多少？", "answers": ["349", "349元"], "data_source": "ecommerce_single", "gold_docs": ["P021"]}
+{"id": "ecom_0110", "question": "赤焰R1SE支持自动集尘吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P025"]}
+{"id": "ecom_0168", "question": "蓝曜T5青春版激活之后还能七天无理由退货吗？", "answers": ["不能", "不支持"], "data_source": "ecommerce_multihop", "gold_docs": ["P005", "S001"]}
+{"id": "ecom_0223", "question": "墨羽A5青春版和赤焰A3Max哪个APF 能效比更高？", "answers": ["赤焰A3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P015", "P013"]}
+{"id": "ecom_0024", "question": "蓝曜T5青春版的防水等级是什么？", "answers": ["IP68"], "data_source": "ecommerce_single", "gold_docs": ["P005"]}
+{"id": "ecom_0048", "question": "云穗W5青春版支持空气洗吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P010"]}
+{"id": "ecom_0104", "question": "青岚E4SE的总续航是多少？", "answers": ["38小时", "38"], "data_source": "ecommerce_single", "gold_docs": ["P024"]}
+{"id": "ecom_0206", "question": "蓝曜W4SE和云穗W5青春版哪个售价更便宜？", "answers": ["蓝曜W4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P009", "P010"]}
+{"id": "ecom_0230", "question": "青岚A4SE和墨羽A5青春版哪个售价更便宜？", "answers": ["青岚A4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P014", "P015"]}
+{"id": "ecom_0200", "question": "墨羽W1Pro和蓝曜W4SE哪个洗涤容量更大？", "answers": ["蓝曜W4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P006", "P009"]}
+{"id": "ecom_0062", "question": "赤焰A3Max的APF 能效比是什么？", "answers": ["5.0"], "data_source": "ecommerce_single", "gold_docs": ["P013"]}
+{"id": "ecom_0121", "question": "云穗R4旗舰版的售价是多少？", "answers": ["1699", "1699元"], "data_source": "ecommerce_single", "gold_docs": ["P028"]}
+{"id": "ecom_0147", "question": "购买延保服务后，云穗A2旗舰版的整机保修总时长是多久？", "answers": ["7年", "7"], "data_source": "ecommerce_multihop", "gold_docs": ["P012", "S004"]}
+{"id": "ecom_0146", "question": "购买延保服务后，蓝曜A1Pro的整机保修总时长是多久？", "answers": ["7年", "7"], "data_source": "ecommerce_multihop", "gold_docs": ["P011", "S004"]}
+{"id": "ecom_0225", "question": "蓝曜A1Pro和云穗A2旗舰版哪个售价更便宜？", "answers": ["蓝曜A1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P011", "P012"]}
+{"id": "ecom_0185", "question": "蓝曜T5青春版和赤焰T1Pro哪个售价更便宜？", "answers": ["蓝曜T5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P005", "P001"]}
+{"id": "ecom_0033", "question": "青岚W2旗舰版支持空气洗吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P007"]}
+{"id": "ecom_0138", "question": "购买延保服务后，沐光T3Max的整机保修总时长是多久？", "answers": ["2年", "2"], "data_source": "ecommerce_multihop", "gold_docs": ["P003", "S004"]}
+{"id": "ecom_0054", "question": "蓝曜A1Pro支持新风功能吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P011"]}
+{"id": "ecom_0124", "question": "云穗R4旗舰版的避障方式是什么？", "answers": ["机械避障"], "data_source": "ecommerce_single", "gold_docs": ["P028"]}
+{"id": "ecom_0171", "question": "青岚T2旗舰版和墨羽T4SE哪个电池容量更大？", "answers": ["墨羽T4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P002", "P004"]}
+{"id": "ecom_0071", "question": "墨羽A5青春版的匹数是多少？", "answers": ["3.0", "3.0匹"], "data_source": "ecommerce_single", "gold_docs": ["P015"]}
+{"id": "ecom_0060", "question": "赤焰A3Max的售价是多少？", "answers": ["7299元", "7299"], "data_source": "ecommerce_single", "gold_docs": ["P013"]}
+{"id": "ecom_0131", "question": "延保服务把整机保修延长多久？", "answers": ["1年", "1"], "data_source": "ecommerce_policy", "gold_docs": ["S004"]}
+{"id": "ecom_0253", "question": "沐光E2旗舰版和蓝曜E1Pro哪个降噪深度更高？", "answers": ["蓝曜E1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P022", "P021"]}
+{"id": "ecom_0273", "question": "青岚R3Pro和赤焰R1SE哪个售价更便宜？", "answers": ["青岚R3Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P027", "P025"]}
+{"id": "ecom_0220", "question": "青岚A4SE和蓝曜A1Pro哪个APF 能效比更高？", "answers": ["蓝曜A1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P014", "P011"]}
+{"id": "ecom_0008", "question": "青岚T2旗舰版支持无线充电吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P002"]}
+{"id": "ecom_0263", "question": "赤焰R1SE和云穗R4旗舰版哪个吸力更大？", "answers": ["云穗R4旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P025", "P028"]}
+{"id": "ecom_0017", "question": "墨羽T4SE的有线快充功率是多少？", "answers": ["66W", "66"], "data_source": "ecommerce_single", "gold_docs": ["P004"]}
+{"id": "ecom_0058", "question": "云穗A2旗舰版支持自清洁吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P012"]}
+{"id": "ecom_0015", "question": "墨羽T4SE的售价是多少？", "answers": ["6799元", "6799"], "data_source": "ecommerce_single", "gold_docs": ["P004"]}
+{"id": "ecom_0161", "question": "购买延保服务后，蓝曜R2青春版的整机保修总时长是多久？", "answers": ["3年", "3"], "data_source": "ecommerce_multihop", "gold_docs": ["P026", "S004"]}
+{"id": "ecom_0181", "question": "青岚T2旗舰版和墨羽T4SE哪个售价更便宜？", "answers": ["青岚T2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P002", "P004"]}
+{"id": "ecom_0018", "question": "墨羽T4SE支持无线充电吗？", "answers": ["不支持"], "data_source": "ecommerce_single", "gold_docs": ["P004"]}
+{"id": "ecom_0001", "question": "赤焰T1Pro的电池容量是多少？", "answers": ["4500毫安时", "4500mAh", "4500"], "data_source": "ecommerce_single", "gold_docs": ["P001"]}
+{"id": "ecom_0112", "question": "蓝曜R2青春版的吸力是多少？", "answers": ["8000Pa", "8000"], "data_source": "ecommerce_single", "gold_docs": ["P026"]}
+{"id": "ecom_0117", "question": "青岚R3Pro的吸力是多少？", "answers": ["4000", "4000Pa"], "data_source": "ecommerce_single", "gold_docs": ["P027"]}
+{"id": "ecom_0010", "question": "沐光T3Max的售价是多少？", "answers": ["3199元", "3199"], "data_source": "ecommerce_single", "gold_docs": ["P003"]}
+{"id": "ecom_0173", "question": "赤焰T1Pro和沐光T3Max哪个电池容量更大？", "answers": ["沐光T3Max"], "data_source": "ecommerce_multihop", "gold_docs": ["P001", "P003"]}
+{"id": "ecom_0032", "question": "青岚W2旗舰版的洗涤噪音是多少？", "answers": ["48dB", "48"], "data_source": "ecommerce_single", "gold_docs": ["P007"]}
+{"id": "ecom_0115", "question": "蓝曜R2青春版支持自动集尘吗？", "answers": ["支持"], "data_source": "ecommerce_single", "gold_docs": ["P026"]}
+{"id": "ecom_0126", "question": "七天无理由退货需要在签收后几天内申请？", "answers": ["7天", "7"], "data_source": "ecommerce_policy", "gold_docs": ["S001"]}
+{"id": "ecom_0061", "question": "赤焰A3Max的匹数是多少？", "answers": ["2.0匹", "2.0"], "data_source": "ecommerce_single", "gold_docs": ["P013"]}
+{"id": "ecom_0231", "question": "云穗A2旗舰版和赤焰A3Max哪个售价更便宜？", "answers": ["云穗A2旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P012", "P013"]}
+{"id": "ecom_0224", "question": "蓝曜A1Pro和青岚A4SE哪个售价更便宜？", "answers": ["蓝曜A1Pro"], "data_source": "ecommerce_multihop", "gold_docs": ["P011", "P014"]}
+{"id": "ecom_0191", "question": "蓝曜T5青春版和墨羽T4SE哪个重量更轻？", "answers": ["蓝曜T5青春版"], "data_source": "ecommerce_multihop", "gold_docs": ["P005", "P004"]}
+{"id": "ecom_0204", "question": "青岚W2旗舰版和蓝曜W4SE哪个洗涤容量更大？", "answers": ["蓝曜W4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P007", "P009"]}
+{"id": "ecom_0159", "question": "购买延保服务后，青岚E4SE的整机保修总时长是多久？", "answers": ["2年", "2"], "data_source": "ecommerce_multihop", "gold_docs": ["P024", "S004"]}
+{"id": "ecom_0102", "question": "青岚E4SE的售价是多少？", "answers": ["1199元", "1199"], "data_source": "ecommerce_single", "gold_docs": ["P024"]}
+{"id": "ecom_0108", "question": "赤焰R1SE的电池容量是多少？", "answers": ["5200mAh", "5200毫安时", "5200"], "data_source": "ecommerce_single", "gold_docs": ["P025"]}
+{"id": "ecom_0216", "question": "云穗A2旗舰版和青岚A4SE哪个APF 能效比更高？", "answers": ["青岚A4SE"], "data_source": "ecommerce_multihop", "gold_docs": ["P012", "P014"]}
+{"id": "ecom_0270", "question": "云穗R4旗舰版和赤焰R1SE哪个售价更便宜？", "answers": ["云穗R4旗舰版"], "data_source": "ecommerce_multihop", "gold_docs": ["P028", "P025"]}
+{"id": "ecom_0135", "question": "签收后可以申请开具什么类型的发票？", "answers": ["电子发票"], "data_source": "ecommerce_policy", "gold_docs": ["S008"]}
+{"id": "ecom_0084", "question": "赤焰L4SE的售价是多少？", "answers": ["7799", "7799元"], "data_source": "ecommerce_single", "gold_docs": ["P019"]}

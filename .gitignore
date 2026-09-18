@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 密钥与环境
+.env
+
+# 运行产物
+.cache/
+swanlog/
+*.log
+ecommerce/qdrant_store/
+
+# Wiki 原始数据与生成的大文件（用 prepare_data.py 重新生成）
+datasets/raw/
+datasets/train.jsonl
+datasets/test.jsonl
+datasets/dev.jsonl

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="900" height="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <rect width="900" height="700" fill="#ffffff"/>
+
+  <text x="30" y="42" font-size="20" font-weight="700" fill="#1a1a1a">Ecom Search-R1：一次 rollout 与一次策略更新</text>
+  <text x="30" y="66" font-size="13" fill="#666666">左：多轮交互采样（rollout）。右：可验证奖励打分后回传 GRPO 更新策略。</text>
+
+  <!-- ============ 左列：rollout ============ -->
+  <rect x="24" y="86" width="500" height="566" rx="10" fill="#f7f8fa" stroke="#d8dce3"/>
+  <text x="44" y="114" font-size="13" font-weight="700" fill="#4a5568">ROLLOUT（每道题采样 8 条轨迹）</text>
+
+  <!-- 1 问题 -->
+  <rect x="60" y="132" width="428" height="52" rx="7" fill="#ffffff" stroke="#b8c0cc"/>
+  <text x="78" y="154" font-size="13" font-weight="600" fill="#1a1a1a">① 一道中文电商客服题</text>
+  <text x="78" y="173" font-size="12" fill="#6b7280">「XX 牌空气炸锅保修多久？顺便说下多少钱」</text>
+
+  <path d="M274 184 L274 206" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- 2 策略模型 -->
+  <rect x="60" y="208" width="428" height="56" rx="7" fill="#eef4ff" stroke="#8bb0ea"/>
+  <text x="78" y="231" font-size="13" font-weight="600" fill="#1a1a1a">② 策略模型 Qwen3.5-4B（GRPO 训练中）</text>
+  <text x="78" y="250" font-size="12" fill="#4b5563">按当前策略决定：直接答 / 还是先搜一次</text>
+
+  <path d="M274 264 L274 286" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="286" y="280" font-size="11" fill="#7c8595">输出 tool_call</text>
+
+  <!-- 3 检索工具 -->
+  <rect x="60" y="288" width="428" height="76" rx="7" fill="#fff8e8" stroke="#e0b95f"/>
+  <text x="78" y="311" font-size="13" font-weight="600" fill="#1a1a1a">③ 检索工具：Qdrant + BGE-small-zh</text>
+  <text x="78" y="330" font-size="12" fill="#4b5563">36 篇虚构品牌文档（28 商品手册 + 8 服务政策）</text>
+  <text x="78" y="349" font-size="12" fill="#4b5563">返回带 Doc-ID 的观测（模型必须引用它）</text>
+
+  <path d="M274 364 L274 386" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- 4 循环 -->
+  <rect x="60" y="388" width="428" height="54" rx="7" fill="#ffffff" stroke="#b8c0cc" stroke-dasharray="5 4"/>
+  <text x="78" y="410" font-size="13" font-weight="600" fill="#1a1a1a">④ 把观测拼回 prompt，进入下一轮</text>
+  <text x="78" y="429" font-size="12" fill="#6b7280">循环直到模型输出最终答案（多跳题通常 2–3 轮）</text>
+
+  <!-- 回环箭头 -->
+  <path d="M510 415 L538 415 L538 236 L492 236" fill="none" stroke="#5b8def" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+  <text x="546" y="330" font-size="11" fill="#5b8def" transform="rotate(90 546 330)">循环</text>
+
+  <path d="M274 442 L274 464" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- 5 输出 -->
+  <rect x="60" y="466" width="428" height="66" rx="7" fill="#eefaf3" stroke="#68c39a"/>
+  <text x="78" y="489" font-size="13" font-weight="600" fill="#1a1a1a">⑤ 输出严格两行</text>
+  <text x="78" y="509" font-size="12" fill="#4b5563" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">Answer: 保修 24 个月</text>
+  <text x="78" y="525" font-size="12" fill="#4b5563" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">Source: S003</text>
+
+  <path d="M274 532 L274 554" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- 6 奖励 -->
+  <rect x="60" y="556" width="428" height="78" rx="7" fill="#fdf0f0" stroke="#e39a9a"/>
+  <text x="78" y="579" font-size="13" font-weight="600" fill="#1a1a1a">⑥ 可验证奖励（不需要奖励模型）</text>
+  <text x="78" y="599" font-size="12" fill="#4b5563">EM 1.0 ＋ 有引用 0.1 ＋ 引用真在本轮检索 0.2 ＋ 引用命中 gold 0.2</text>
+  <text x="78" y="617" font-size="12" fill="#4b5563">－ 0.05 × min(搜索次数, 4)</text>
+  <text x="78" y="632" font-size="11" fill="#8a6d6d">引用不在本轮检索结果里 → 该分项直接 0（防编造）</text>
+
+  <!-- ============ 右列：训练 ============ -->
+  <rect x="548" y="86" width="328" height="566" rx="10" fill="#f7f8fa" stroke="#d8dce3"/>
+  <text x="568" y="114" font-size="13" font-weight="700" fill="#4a5568">TRAIN（GRPO，远端 PyTRIO）</text>
+
+  <rect x="572" y="132" width="280" height="70" rx="7" fill="#ffffff" stroke="#b8c0cc"/>
+  <text x="590" y="155" font-size="13" font-weight="600" fill="#1a1a1a">同一题的 8 条轨迹打分</text>
+  <text x="590" y="174" font-size="12" fill="#4b5563">组内比较，不需要 critic / 价值网络</text>
+  <text x="590" y="192" font-size="11" fill="#8a929e">advantage = r − mean(组内 r)</text>
+
+  <path d="M712 202 L712 226" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="572" y="228" width="280" height="88" rx="7" fill="#eef4ff" stroke="#8bb0ea"/>
+  <text x="590" y="251" font-size="13" font-weight="600" fill="#1a1a1a">组内中心化 → advantage</text>
+  <text x="590" y="271" font-size="12" fill="#4b5563">这一条决定了什么样的奖励项</text>
+  <text x="590" y="289" font-size="12" fill="#4b5563">「根本不产生梯度」</text>
+  <text x="590" y="307" font-size="11" fill="#8a929e">组内恒为常数的分项 → 贡献恒为 0</text>
+
+  <path d="M712 316 L712 340" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="572" y="342" width="280" height="76" rx="7" fill="#ffffff" stroke="#b8c0cc"/>
+  <text x="590" y="365" font-size="13" font-weight="600" fill="#1a1a1a">PPO 截断目标 + KL 惩罚</text>
+  <text x="590" y="385" font-size="12" fill="#4b5563">更新 LoRA 权重</text>
+  <text x="590" y="403" font-size="11" fill="#8a929e">20 步，每步 8 条轨迹/题</text>
+
+  <path d="M712 418 L712 442" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="572" y="444" width="280" height="88" rx="7" fill="#fdf0f0" stroke="#e39a9a"/>
+  <text x="590" y="467" font-size="13" font-weight="600" fill="#1a1a1a">两个数字训完不动</text>
+  <text x="590" y="487" font-size="12" fill="#4b5563">单跳 EM 85.19% → 85.19%</text>
+  <text x="590" y="505" font-size="12" fill="#4b5563">引用命中 gold 92.86% → 92.86%</text>
+  <text x="590" y="523" font-size="11" fill="#8a6d6d">查下来是同一件事：gold 没进 top-3</text>
+
+  <path d="M712 532 L712 556" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="572" y="558" width="280" height="76" rx="7" fill="#eefaf3" stroke="#68c39a"/>
+  <text x="590" y="581" font-size="13" font-weight="600" fill="#1a1a1a">诊断 → 改检索器 top-k</text>
+  <text x="590" y="601" font-size="12" fill="#4b5563">k=3 → 8：两指标一起解冻</text>
+  <text x="590" y="619" font-size="11" fill="#5f8a76">同一根因，一次修复</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+      <path d="M0,0 L4,7 L8,0" fill="none" stroke="#94a3b8" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,4 L7,0 L7,8" fill="#5b8def"/>
+    </marker>
+  </defs>
+</svg>

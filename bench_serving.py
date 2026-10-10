@@ -242,6 +242,12 @@ def load_hf_model(model_name: str):
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    # decoder-only 模型批量生成必须左填充。右填充时 pad token 会排在真实 prompt 之前，
+    # 模型从 pad 之后续写，输出内容与生成长度都会被污染（transformers 也会打印
+    # "right-padding was detected" 警告）。首次 Kaggle 实测就踩了这一点。
+    tokenizer.padding_side = "left"
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
     candidates = []
     try:  # transformers 新版本才有 ImageTextToText 基类
         from transformers import AutoModelForImageTextToText
@@ -250,12 +256,18 @@ def load_hf_model(model_name: str):
     except ImportError:
         pass
     candidates.append(AutoModelForCausalLM)
+    # T4(sm_75) 不支持 bf16，dtype="auto" 会按模型 config 加载 bf16，在这张卡上退化为
+    # 慢速模拟实现。显式 fp16 才测得出真实部署性能。
+    import torch
+
+    prefer_fp16 = torch.cuda.is_available() and not torch.cuda.is_bf16_supported()
+    load_dtype = torch.float16 if prefer_fp16 else "auto"
     last_error: Exception | None = None
     for model_cls in candidates:
         for dtype_kwarg in ("dtype", "torch_dtype"):
             try:
                 model = model_cls.from_pretrained(
-                    model_name, device_map="auto", trust_remote_code=True, **{dtype_kwarg: "auto"}
+                    model_name, device_map="auto", trust_remote_code=True, **{dtype_kwarg: load_dtype}
                 )
                 return tokenizer, model.eval()
             except Exception as error:  # 记录后在下一组合重试
@@ -285,7 +297,10 @@ def run_hf_mode(args, prompts) -> list[dict]:
         with torch.no_grad():
             generated = model.generate(**inputs, max_new_tokens=args.max_new_tokens, do_sample=False)
         wall = time.monotonic() - started
-        completion_tokens = int((generated.shape[1] - inputs["input_ids"].shape[1]) * len(batch))
+        # 左填充下各序列可能提前 EOS，generate 会把其余位置补成 pad_token。
+        # 直接按「统一长度 × batch」算会高估，逐行统计非 pad 的新增 token。
+        new_tokens = generated[:, inputs["input_ids"].shape[1] :]
+        completion_tokens = int((new_tokens != tokenizer.pad_token_id).sum().item())
         amortized = wall / len(batch)
         results.append(
             {

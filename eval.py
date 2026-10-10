@@ -23,7 +23,7 @@ import pytrio as trio
 from tqdm import tqdm
 
 from data import SearchExample, load_examples
-from reward import REWARD_PRESETS, resolve_weights
+from reward import resolve_weights
 from rollout import RolloutConfig, Trajectory, rollout_batch
 from search import (
     SEARCH_BACKENDS,

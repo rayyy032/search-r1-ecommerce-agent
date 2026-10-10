@@ -1,0 +1,498 @@
+{
+  "run_name": "ecom-sft-coldstart",
+  "questions": 60,
+  "samples_per_question": 4,
+  "min_reward": 1.0,
+  "trajectories_sampled": 240,
+  "trajectories_accepted": 109,
+  "acceptance_rate": 0.45416666666666666,
+  "sft_datums": 109,
+  "skipped_overlong": 0,
+  "difficulty_buckets": {
+    "easy(通过率=1)": 23,
+    "golden(0<通过率<1)": 13,
+    "hard(通过率=0)": 24
+  },
+  "per_question": [
+    {
+      "id": "ecom_0072",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0130",
+      "data_source": "ecommerce_policy",
+      "samples": 4,
+      "accepted": 2,
+      "acceptance_rate": 0.5,
+      "mean_reward": 0.95
+    },
+    {
+      "id": "ecom_0259",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0217",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.65
+    },
+    {
+      "id": "ecom_0031",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0062",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.4375
+    },
+    {
+      "id": "ecom_0115",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0137",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 3,
+      "acceptance_rate": 0.75,
+      "mean_reward": 1.1125
+    },
+    {
+      "id": "ecom_0257",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.65
+    },
+    {
+      "id": "ecom_0185",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0238",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0188",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0271",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.525
+    },
+    {
+      "id": "ecom_0159",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.375
+    },
+    {
+      "id": "ecom_0227",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0209",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.17500000000000004
+    },
+    {
+      "id": "ecom_0231",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.375
+    },
+    {
+      "id": "ecom_0038",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0033",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0178",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0240",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.65
+    },
+    {
+      "id": "ecom_0204",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0105",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.25000000000000006
+    },
+    {
+      "id": "ecom_0040",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.025000000000000012
+    },
+    {
+      "id": "ecom_0232",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.2125
+    },
+    {
+      "id": "ecom_0103",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0146",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.625
+    },
+    {
+      "id": "ecom_0047",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0011",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0246",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0192",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0108",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0262",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.65
+    },
+    {
+      "id": "ecom_0149",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.3125
+    },
+    {
+      "id": "ecom_0233",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.28750000000000003
+    },
+    {
+      "id": "ecom_0147",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.425
+    },
+    {
+      "id": "ecom_0081",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0077",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0064",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0084",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0223",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.65
+    },
+    {
+      "id": "ecom_0183",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0068",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0210",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.6625
+    },
+    {
+      "id": "ecom_0066",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0094",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0005",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0124",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0043",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0131",
+      "data_source": "ecommerce_policy",
+      "samples": 4,
+      "accepted": 2,
+      "acceptance_rate": 0.5,
+      "mean_reward": 0.95
+    },
+    {
+      "id": "ecom_0264",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.4
+    },
+    {
+      "id": "ecom_0239",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.65
+    },
+    {
+      "id": "ecom_0214",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.275
+    },
+    {
+      "id": "ecom_0241",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 1,
+      "acceptance_rate": 0.25,
+      "mean_reward": 0.65
+    },
+    {
+      "id": "ecom_0104",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.17500000000000004
+    },
+    {
+      "id": "ecom_0020",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0133",
+      "data_source": "ecommerce_policy",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": 0.45
+    },
+    {
+      "id": "ecom_0099",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    },
+    {
+      "id": "ecom_0273",
+      "data_source": "ecommerce_multihop",
+      "samples": 4,
+      "accepted": 0,
+      "acceptance_rate": 0.0,
+      "mean_reward": -0.012499999999999994
+    },
+    {
+      "id": "ecom_0102",
+      "data_source": "ecommerce_single",
+      "samples": 4,
+      "accepted": 4,
+      "acceptance_rate": 1.0,
+      "mean_reward": 1.45
+    }
+  ]
+}

@@ -18,7 +18,6 @@ if str(REPO_ROOT) not in sys.path:
 
 from reward import (  # noqa: E402
     DEFAULT_WEIGHTS,
-    REWARD_PRESETS,
     RewardWeights,
     resolve_weights,
     reward_contributions,

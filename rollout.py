@@ -17,7 +17,7 @@ from protocol import (
     stop_sequences,
     tool_message,
 )
-from reward import score_answer
+from reward import RewardWeights, score_answer
 from search import SearchClient, SearchResult, format_item
 
 
@@ -306,14 +306,19 @@ def resolve_searches(
     )
 
 
-def score_trajectory(trajectory: Trajectory) -> None:
-    """给完成的轨迹写入格式、精确匹配与引用可溯源奖励。"""
+def score_trajectory(trajectory: Trajectory, weights: RewardWeights | None = None) -> None:
+    """给完成的轨迹写入格式、精确匹配与引用可溯源奖励。
+
+    weights 为 None 时使用 reward.DEFAULT_WEIGHTS（线上配置）；奖励项消融时传入
+    按预设构造的权重，实现与线上配置的单变量对照。
+    """
     result = score_answer(
         trajectory.final_text,
         trajectory.example.answers,
         retrieved_doc_ids=trajectory.retrieved_doc_ids,
         gold_doc_ids=trajectory.example.gold_docs or None,
         search_calls=trajectory.search_calls,
+        weights=weights,
     )
     trajectory.reward = result.reward
     trajectory.valid_format = result.valid_format

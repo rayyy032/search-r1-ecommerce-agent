@@ -49,7 +49,7 @@ import pytrio as trio
 import swanlab
 from tqdm import tqdm
 
-from data import shuffled_examples, take_batch
+from data import shuffled_examples
 from rollout import RolloutConfig, Trajectory, rollout_batch
 from search import SEARCH_BACKENDS, create_search_client, resolve_search_concurrency, resolve_search_timeout
 

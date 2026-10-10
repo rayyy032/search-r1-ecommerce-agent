@@ -2,7 +2,7 @@
 
 # Ecom Search-R1
 
-**中文电商客服 Agent。用 GRPO 训练 Qwen3.5-4B 学会「何时检索、搜什么」，回答必须带出处。**
+中文电商客服 Agent：用 GRPO 训练 Qwen3.5-4B 学会「何时检索、搜什么」，回答必须带出处。
 
 <a href="https://pytrio.com"><img alt="PyTRIO" src="https://img.shields.io/badge/PyTRIO-Remote%20Training-d94a45?style=flat" /></a>
 <a href="https://swanlab.cn"><img alt="SwanLab" src="https://img.shields.io/badge/SwanLab-Experiment%20Tracking-258f4b?style=flat" /></a>
@@ -12,7 +12,9 @@
 
 </div>
 
-## 这是什么
+## 简介
+
+基于 [KMnO4-zx/agentic-rl-lab](https://github.com/KMnO4-zx/agentic-rl-lab)（Apache-2.0）的 03-search-r1 实验框架改造：把英文 Wikipedia 问答换成中文电商客服场景，加了引用可溯源的奖励、SFT 冷启动、检索消融与部署压测。
 
 用户问「XX 牌空气炸锅保修多久，多少钱」，模型自己判断要不要查商品文档，查到什么就答什么，答案末尾必须给出处编号。
 
@@ -20,7 +22,7 @@
 
 ![架构](docs/images/architecture.svg)
 
-## 结果
+## 评测结果
 
 电商场景，本地 Qdrant 检索，70 题固定评测集：
 
@@ -42,10 +44,11 @@
 
 正确率第 2 步触底到 9.4%（首次策略更新后的格式震荡），第 9 步起稳定在 85% 以上。奖励收敛到 1.43，接近复合奖励上限。逐步指标与原始日志见 [训练曲线](docs/training-curves.md)。
 
-## 快速开始
+## 安装
+
+需要 Python >= 3.13 和 [uv](https://docs.astral.sh/uv/)。
 
 ```bash
-# 需要 Python >= 3.13 和 uv
 uv sync
 
 # 建本地向量库（首次会自动下载 BGE 模型，约 90MB）
@@ -53,7 +56,11 @@ uv run python ecommerce/index_qdrant.py
 
 # 跑自检，不需要 GPU
 uv run --extra dev pytest tests/ -q
+```
 
+## 快速开始
+
+```bash
 # 20 步 GRPO 训练（GPU 在远端 PyTRIO）
 SEARCH_R1_SCENE=ecommerce uv run python train.py \
     --max-steps 20 --save-every 5 \
@@ -68,20 +75,20 @@ uv run python eval.py --search-backend ecommerce --output eval_result/ecom_eval_
 
 训练和采样走远端 PyTRIO，需要一个 API key（`pytrio login`，密钥存在 `~/.pytrio/config.toml`）。本机只做数据组装和本地检索，不需要 GPU。
 
-**唯一需要 GPU 的脚本是 `bench_serving.py`**（推理部署压测），用仓库里的 `kaggle_bench_serving.ipynb` 在 Kaggle T4 上跑。本地是 macOS，没有 CUDA。
+唯一需要 GPU 的脚本是 `bench_serving.py`（推理部署压测），用仓库里的 `kaggle_bench_serving.ipynb` 在 Kaggle T4 上跑。本地是 macOS，没有 CUDA。
 
-## 我做了什么
+## 相对上游的改动
 
-基于 [KMnO4-zx/agentic-rl-lab](https://github.com/KMnO4-zx/agentic-rl-lab)（Apache-2.0）的 03-search-r1 实验框架扩展。相对原仓库新增或修改的文件在目录结构里用 ★ 标出，其余是原仓库代码。
-
-分工上，原仓库给的是英文 Wikipedia 问答的骨架，我做的是：
+原仓库提供英文 Wikipedia 问答的骨架（数据、协议、GRPO 训练与评测流程），本仓库做的场景改造和新增工作：
 
 - 把场景换成中文电商客服，自己生成 36 篇商品文档和 204/70 的训练评测集（`ecommerce/build_data.py`，seed=42 纯代码生成，每题带 `gold_docs` 标注答案依据）
-- 接了本地检索环境：Qdrant 嵌入式向量库 + `BGE-small-zh-v1.5`，检索结果带 Doc-ID 回显，供模型引用
-- 设计了引用可溯源的复合奖励，并且用反事实重打分量化每个奖励分项实际产生了多少梯度（`reward.py`、`reward_ablation.py`）
-- 补了 SFT 冷启动环节（拒绝采样），把 base → SFT → RL 的三段式补齐（`sft.py`）
-- 跑了检索器 top-k 消融，定位残留错题的瓶颈（`ecommerce/retrieval_recall.py`）
-- 做了推理部署压测（`bench_serving.py`）
+- 接本地检索环境：Qdrant 嵌入式向量库 + `BGE-small-zh-v1.5`，检索结果带 Doc-ID 回显，供模型引用
+- 设计引用可溯源的复合奖励，并用反事实重打分量化每个奖励分项实际产生了多少梯度（`reward.py`、`reward_ablation.py`）
+- 补 SFT 冷启动环节（拒绝采样），把 base → SFT → RL 的三段式补齐（`sft.py`）
+- 跑检索器 top-k 消融，定位残留错题的瓶颈（`ecommerce/retrieval_recall.py`）
+- 做推理部署压测（`bench_serving.py`）
+
+新增或修改的文件在目录结构里用 ★ 标出，其余是原仓库代码。
 
 ## 项目结构
 

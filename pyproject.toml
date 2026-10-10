@@ -18,6 +18,14 @@ dependencies = [
     "tqdm>=4.68.3",
 ]
 
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
 [tool.uv.sources]
 # 本地只做数据与张量处理；训练和采样由远程 PyTRIO 服务执行。
 deepseek-search = { git = "https://github.com/KMnO4-zx/deepseek-search.git", rev = "6215c8dbb7347f94e9dcea6e741df5918449d6c4" }

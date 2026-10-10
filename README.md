@@ -2,13 +2,17 @@
 
 用 **GRPO 强化学习**训练 Qwen3.5-4B，让模型在多轮对话中**自主决定何时搜索、搜什么、何时作答**，并输出**可溯源引用**——在自建的中文电商客服场景上，EM 从 41.9% 提升到 **91.6%**（多跳题 +74.4pp），且引用**零编造**。
 
+这个仓库不止是「跑了个 RL」：完整的链路是 **base → SFT 冷启动（拒绝采样）→ GRPO**，并且**对奖励函数本身做了归因**——用落盘的真实轨迹量化出「哪个奖励分项真的在产生梯度、哪个只是摆设」。后者比涨点更能说明问题，详见 [奖励项归因](#奖励项归因05-的引用权重里有多少真的在起作用)。
+
 **个人独立完成的核心工作**：
 
-- **场景改造**：将英文 Wikipedia 问答管线改造为中文电商客服——自建 36 篇虚构品牌商品文档 + 204/70 训练评测集（虚构品牌防止模型靠参数化知识"背答案"，逼它走检索）
-- **检索后端**：Qdrant 嵌入式向量库 + `BGE-small-zh-v1.5` 中文向量模型，检索结果带 Doc-ID 回显供模型引用
-- **奖励设计**：引用可溯源复合奖励（EM + 引用存在 + **引用真实检索校验** + gold 命中 − 搜索成本），从奖励层面抑制编造引用
-- **训练与双评测**：PyTRIO 远端 GRPO 20 步训练，Base vs Step-20 各 70 题 × 15 指标全量评测（原始记录见 `eval_result/`）
-- **管线验证**：先在 Wikipedia 场景完整跑通原实验作为改造前的正确性基线（EM 27.1%→31.4%，多跳 HotpotQA +20pp），确保后续电商场景的提升来自场景改造而非管线引入的偏差
+- **场景改造与数据构建**：将英文 Wikipedia 问答管线改造为中文电商客服——**全代码生成** 36 篇虚构品牌文档（28 商品手册 + 8 服务政策）+ 204/70 训练评测集，每题带 `gold_docs` 标注答案依据
+- **本地检索环境**：Qdrant 嵌入式向量库 + `BGE-small-zh-v1.5` 中文向量模型，检索结果带 Doc-ID 回显供模型引用
+- **奖励设计 + 奖励归因**：引用可溯源复合奖励（EM + 引用存在 + 引用真实检索校验 + gold 命中 − 搜索成本），并用反事实重打分量化每个分项的真实梯度贡献（[`reward_ablation.py`](reward_ablation.py)）
+- **SFT 冷启动**：拒绝采样筛出「答案对 + 引用对」的轨迹做冷启动，**通过率本身就是难度分层**（[`sft.py`](sft.py)）
+- **训练与双评测**：PyTRIO 远端 GRPO 训练，Base vs Step-20 各 70 题 × 15 指标全量评测（原始记录见 `eval_result/`）
+- **部署压测**：把 4B 策略服务化，vLLM vs HF generate 的并发吞吐 / TTFT / 尾延迟对比（[`bench_serving.py`](bench_serving.py)）
+- **管线验证**：先在 Wikipedia 场景完整跑通原实验作为改造前的正确性基线（EM 27.1%→31.4%，多跳 HotpotQA +20pp）
 
 > 基于 [KMnO4-zx/agentic-rl-lab](https://github.com/KMnO4-zx/agentic-rl-lab)（Apache-2.0）的 03-search-r1 实验框架扩展；相对原仓库修改/新增的文件在目录结构中以 ★ 标注。
 
@@ -21,14 +25,19 @@
 | **EM（宏平均）** | 41.9% | **91.6%** | **+49.8pp** |
 | 多跳题 EM（需 ≥2 次检索） | 15.4% | **89.7%** | **+74.4pp** |
 | 政策类题 EM（保修/物流/退换） | 25.0% | **100.0%** | +75.0pp |
-| 单跳题 EM | 85.2% | 85.2% | 持平 |
+| 单跳题 EM | 85.2% | 85.2% | **持平（见下）** |
 | 格式合法率（Answer+Source） | 98.6% | **100.0%** | +1.4pp |
 | 引用存在率 | 98.6% | **100.0%** | +1.4pp |
 | **引用真实检索率（防编造）** | 98.6% | **100.0%** | +1.4pp |
-| 引用 gold 命中率 | 92.9% | 92.9% | 持平 |
+| 引用 gold 命中率 | 92.9% | 92.9% | **持平（见下）** |
 | 平均搜索次数 | 1.44 | 1.56 | 多跳检索更充分，成本可控 |
 
 核心结论：RL 训练后模型学会了**多轮检索再作答**——多跳题（先查商品、再查政策）提升 +74.4pp，且**所有引用编号均真实来自检索结果**（零编造），格式 100% 合规。
+
+**两个「没动」的数字比涨点更有信息量**：
+
+1. **单跳题 85.19% → 85.19%，一分不涨**：增益全部来自多跳题（15.4%→89.7%）。说明 base 已经会的题，RL 一点没碰过——训练信号只作用在「模型原本做不出来的那部分」。
+2. **引用 gold 命中率卡在 92.86% 不随训练变化**：这不是噪声，而是奖励函数的机制问题，[下一节](#奖励项归因05-的引用权重里有多少真的在起作用) 用反事实重打分把它解释清楚了。
 
 ### Wikipedia 场景（改造前的管线验证基线，Wikipedia 免费后端，70 题固定评测集）
 
@@ -40,55 +49,146 @@
 | 格式合法率 | 50.0% | **70.0%** | +20pp |
 | 平均搜索次数 | 2.93 | 2.59 | 搜索更高效 |
 
-## 这个项目做了什么
+## 奖励项归因：0.5 的引用权重里有多少真的在起作用
 
-### 1. 中文电商客服场景改造（核心增量）
+电商场景的复合奖励有 4 个正分项：
 
-原实验只有英文 Wikipedia 问答。本仓库将其改造为中文电商客服话术场景，解决的是真实客服 Agent 的两大痛点：**回答要有据可查（引用可溯源）、不能编造引用（防幻觉）**。
+$$r = 1.0 \cdot \text{EM} + \underbrace{0.1}_{\text{有引用}} + \underbrace{0.2}_{\text{引用真实检索}} + \underbrace{0.2}_{\text{引用命中 gold}} - 0.05 \cdot \min(\text{搜索次数}, 4)$$
 
-**数据构建**（`ecommerce/build_data.py`）
-- 36 篇虚构品牌的商品文档（型号、价格、保修、物流政策等）——虚构品牌防止模型靠参数化知识"背答案"，逼它走检索
-- 204 条训练 + 70 条评测问答对，每题标注 `gold_docs`（答案依据文档编号）
+「引用 gold 命中率不涨」的自然怀疑是「那 0.2 权重太弱」。但真实原因不是权重弱。`reward_ablation.py` 对 `eval_result/` 里 70 条落盘轨迹做反事实重打分（先把每项权重单独置 0，再看奖励景观怎么变），判据是 **GRPO 的组内中心化**：
 
-**本地向量检索后端**（`search.py` 新增 `ecommerce` 后端）
-- Qdrant 嵌入式存储 + `BGE-small-zh-v1.5` 中文向量模型，免外部搜索 API
-- 检索结果回显文档编号（`P001`/`S012` 等 Doc-ID），供模型引用
+```python
+advantage_i = reward_i − mean(reward_group)   # rollout.assign_group_advantages
+```
 
-**引用可溯源的复合奖励**（`reward.py`）
+因此**任何在同一组内恒为常数的分项，对 advantage 的贡献恒为 0**。于是「把某项权重置 0 后，70 题两两之间的相对顺序有没有变」就成了「这项到底有没有在产生梯度」的判据。
 
-$$r = 1.0 \cdot \text{EM} + 0.1 \cdot \mathbb{1}[\text{有引用}] + 0.2 \cdot \mathbb{1}[\text{引用在真实检索结果中}] + 0.2 \cdot \mathbb{1}[\text{引用命中 gold docs}] - 0.05 \cdot \min(\text{搜索次数}, 4)$$
+### 归因结果（`uv run python reward_ablation.py`，可复现）
 
-- **引用真实检索校验**：模型输出的 `Source: P003` 必须真的出现在本轮轨迹检索到的文档里，防止编造引用编号
-- **gold 命中奖励**：引用的文档确实是答案依据，鼓励模型引用对的来源而不只是随便引一个
-- **搜索成本惩罚**：每次搜索 -0.05，抑制无意义刷搜索
+| 预设（置 0 的项） | 奖励数值变动题数 | **题对顺序变动数** | 判定 |
+|---|---|---|---|
+| `no_has_source`（−0.1） | 70 / 70 | **0** | **仅全局常数偏移 → 组内零梯度** |
+| `no_source_retrieved`（−0.2） | 70 / 70 | **0** | **仅全局常数偏移 → 组内零梯度** |
+| `no_source_gold`（−0.2） | 65 / 70 | 49 | 有信号，但只来自 5 道题 |
+| `no_search_penalty` | 70 / 70 | 927 | 真实起作用（约束检索成本） |
+| `em_only` | 70 / 70 | 1004 | 真实起作用 |
 
-**中文电商客服双协议**（`protocol.py`，环境变量 `SEARCH_R1_SCENE=ecommerce` 切换）
-- 用户模拟协议：中文电商咨询提问风格
-- 系统协议：要求先检索再回答，答案格式为 `Answer:` + `Source:` 两行
+跨 checkpoint 对照（触发率）：
 
-### 2. Wikipedia 场景复现（改造前的管线验证）
+| 分项 | Base | Step-20 | Δ |
+|---|---|---|---|
+| EM | 42.86% | 88.57% | +45.71% |
+| 有引用 | 98.57% | 100.00% | +1.43% |
+| 引用真实检索 | 98.57% | 100.00% | +1.43% |
+| **引用命中 gold** | **92.86%** | **92.86%** | **+0.00%** |
+| 搜索惩罚 | 100.00% | 100.00% | +0.00% |
 
-动手改造之前，先在原实验的 Wikipedia 场景上完整跑通 20 步 GRPO 训练 + 双评测，确认训练/评测管线行为与原实验一致（多跳 HotpotQA +20pp）。这一步保证后续电商场景的提升来自场景改造本身，而不是管线改动引入的偏差——也是换检索后端（Wikipedia API → 本地 Qdrant）、换奖励函数（EM → 复合奖励）时的对照锚点。
+EM × 引用命中 gold 列联表（Step-20，n=70）：
+
+| | 引用对 | 引用错 |
+|---|---|---|
+| **EM=1** | 61 | **1** ← 引用项唯一真正惩罚的「答对却引错」 |
+| **EM=0** | 4 | 4 |
+
+（Base 阶段：EM=1 且引用错 = **0 题**；EM=0 但引用对 = 35 题。）
+
+### 三条结论
+
+1. **0.3 的引用权重（有引用 0.1 + 引用真实检索 0.2）严格不产生梯度。** 置 0 后每题奖励都变了，但题对顺序一对没变——它只贡献了一个全局常数偏移。这两项作为「防编造引用的硬约束」仍然该保留，但**不该指望它带来任何学习信号**。
+2. **`source_gold` 卡死的原因是指标饱和，不是权重太弱。** 它在两个 checkpoint 上触发率完全相同（92.86%），而同期 EM 从 42.86% 涨到 88.57%。于是它与 EM 的 φ 相关系数从 **0.240 升到 0.598**——从「与 EM 弱相关」变成「几乎被 EM 决定」，独立贡献被 EM 吸收掉大半。
+3. **可优化空间只剩 1 道题。** Step-20 上「答案对但引用错」只有 **1 题**（base 阶段是 0 题）。这项奖励在起点就已接近天花板，给再多权重也不会动。
+
+这条负结果和本工作另一个项目（从零手写 GRPO/DAPO 的消融诊断）里 `clip_fraction ≡ 0`（非对称 clip 机制从未触发）是**同一族失效的两种形态**：一个是「机制没触发」，一个是「指标已饱和」，共同主题是——**配置里打开的开关 ≠ 实际生效的机制**。
+
+复现：`python reward_ablation.py`（纯离线，不需 GPU 与 PyTRIO，结果落 `eval_result/reward_ablation.json`）。
+
+### 怎么用它做真正的消融
+
+归因是**离线观测**，要拿「重训后的因果结论」需把权重做成可切换的：
+
+```bash
+# 逐个切换奖励预设重训，其余超参完全一致
+for cfg in full no_source_gold no_source_retrieved no_citation em_only; do
+  SEARCH_R1_SCENE=ecommerce uv run python train.py \
+      --reward-config "$cfg" --max-steps 20 --save-every 5 \
+      --data datasets/ecommerce/train.jsonl --search-backend ecommerce \
+      --run-name "abl-$cfg"
+done
+```
+
+所有可选项见 `reward.REWARD_PRESETS`（`python -c "from reward import REWARD_PRESETS; print(*REWARD_PRESETS)"`）。
+
+## SFT 冷启动：补上 base → SFT → RL 的中间那一段
+
+原实验链路是 `base → RL`。被问「你为什么要做 RL？SFT 做到头了吗？」时，只有 RL 前后两个点，答不上来。`sft.py` 补上标准三段式：
+
+```
+base  →  SFT（拒绝采样冷启动）  →  RL（GRPO + 可溯源奖励）
+```
+
+设计参考 Alibaba-NLP/DeepResearch 的 WebDancer / WebSailor 两阶段 recipe：**先用当前策略对同一道题采样多条轨迹，只保留完全正确的（rejection sampling），把保留轨迹当示范做 SFT；再用 RL 去攻那些筛不出来的难题。**
+
+```bash
+SEARCH_R1_SCENE=ecommerce uv run python sft.py \
+    --data datasets/ecommerce/train.jsonl --search-backend ecommerce \
+    --questions 60 --samples-per-question 4 --min-reward 1.0 --epochs 2 \
+    --run-name ecom-sft-coldstart
+# 输出 sft_runs/<run-name>/ 下的 state 路径，然后接 RL：
+SEARCH_R1_SCENE=ecommerce uv run python train.py \
+    --resume-state '<上一步的 state 路径>' \
+    --max-steps 20 --search-backend ecommerce --run-name ecom-sft-then-rl
+```
+
+**关键设计：拒绝采样通过率本身就是难度分层。** 脚本写出的 `rejection_stats.json` 给出每道题的轨迹通过率：
+
+| 通过率 | 含义 | 用途 |
+|---|---|---|
+| = 0 | base 完全做不出 | SFT 学不到，**留给 RL 主攻** |
+| ∈ (0, 1) | 有对有错 | **SFT 的黄金样本** |
+| = 1 | base 已经会 | 对 SFT 与 RL 都几乎无增益（呼应单跳题 85.2%→85.2% 的持平） |
+
+这就是「数据环节里自己设计的那一步」，而不是「直接下载开源数据集」。
+
+> `min-reward ≥ 1.0` 等价于「答案对且引用全对」：答案错时最多只能拿到 0.5 的引用分（0.1+0.2+0.2），达不到 1.0。
+
+## 这个仓库本身就是一个 agentic RL 环境
+
+「Agent + RL」是当前最热的细分方向，而它的核心工程件不是一个 prompt 编排层，而是**一个多轮可交互、奖励可验证、轨迹可回放的环境**。本仓库的组件恰好就是这个结构：
+
+| 标准 agentic RL 框架的分层 | 本仓库对应文件 | 作用 |
+|---|---|---|
+| Environment / Tools | `search.py`（`ecommerce` 后端，Qdrant 本地向量检索） | 模型可调用的检索工具，返回带 Doc-ID 的观测 |
+| Multi-turn rollout | `rollout.py` | 多轮「生成 → 解析 tool_call → 执行 → 拼接下一轮 prompt」的轨迹采样 |
+| Verifiable reward | `reward.py` | 不需要奖励模型：答案 EM + 引用可溯源，全部可规则判定 |
+| Policy optimization | `train.py` | 组内相对优势（GRPO）+ 动态 micro-batch 装箱 |
+| Diagnostics | `reward_ablation.py` / `analyse.py` | 奖励项归因、逐题 badcase 复查 |
+
+把它对齐到 RAGEN / verl-agent 的目录约定（`environments/ memory/ multi_turn_rollout/ reward_manager/`）是后续升级路径——**而不是**在上面再叠一层确定性 prompt 编排（那种「七阶段 harness」不训模型、只会让技术栈变杂）。
 
 ## 目录结构
 
 ```
-├── train.py            # GRPO 训练（PyTRIO 远端，本地只做数据组装）
-├── eval.py             # 统一评测器：base / checkpoint 共用，支持电商指标
+├── train.py            # GRPO 训练（PyTRIO 远端，本地只做数据组装）★
+├── sft.py              # SFT 冷启动：拒绝采样 + assistant-only 交叉熵 ★新增
+├── eval.py             # 统一评测器：base / checkpoint 共用，支持电商指标 ★
 ├── rollout.py          # 多轮 rollout：搜索工具调用 + 轨迹记录（含 retrieved_doc_ids）★
 ├── search.py           # 搜索后端：deepseek / wikipedia / zhihu / ecommerce(Qdrant) ★
 ├── protocol.py         # 双场景协议：英文 Wiki 问答 / 中文电商客服 ★
-├── reward.py           # 奖励：原版 EM/Format + 电商引用可溯源复合奖励 ★
+├── reward.py           # 奖励：原版 EM/Format + 电商引用可溯源复合奖励（权重可配置）★
+├── reward_ablation.py  # 奖励项归因：反事实重打分，量化每个分项的梯度贡献 ★新增
+├── bench_serving.py    # 部署压测：vLLM vs HF generate 的吞吐 / TTFT / 尾延迟 ★新增
 ├── data.py             # 数据加载（含 gold_docs 字段）★
 ├── prepare_data.py     # Wikipedia 数据准备（原始 lab 既有）
 ├── analyse.py          # 评测结果分析（原始 lab 既有）
 ├── plot_curves.py      # 从训练日志重绘训练曲线（本 README 图表可复现）★
+├── tests/
+│   └── test_reward.py  # 奖励自检：用落盘的真实轨迹把奖励公式钉死 ★新增
 ├── ecommerce/
-│   ├── build_data.py   # 电商文档库 + 训练/评测集生成 ★
+│   ├── build_data.py   # 电商文档库 + 训练/评测集生成（seed=42 全代码生成）★
 │   └── index_qdrant.py # BGE 向量化入库本地 Qdrant ★
 ├── datasets/
 │   └── ecommerce/      # 电商文档与训练/评测数据（train 204 / dev 70）
-├── eval_result/        # 全部评测原始记录（JSONL，可复查逐题结果）
+├── eval_result/        # 全部评测原始记录 + 奖励归因结果（JSONL / JSON，可复查）
 └── docs/
     ├── images/         # 训练曲线图（由 plot_curves.py 生成）等配图
     └── training_data/  # 从训练日志提取的逐步指标（图表数据源，与 SwanLab 同源）
@@ -109,6 +209,9 @@ uv sync
 
 # 搜索后端密钥（仅 deepseek/zhihu 后端需要，wiki/ecommerce 后端免费）
 cp .env.example .env
+
+# 跑自检（不需要 GPU / PyTRIO）
+uv run --extra dev pytest tests/ -q
 ```
 
 ### 电商场景（核心工作）
@@ -119,14 +222,19 @@ uv run python ecommerce/build_data.py
 # 2. 建向量库（首次运行自动下载 BGE 模型，约 90MB）
 uv run python ecommerce/index_qdrant.py
 
-# 3. 训练：20 步 GRPO
+# 3.（可选）SFT 冷启动，产出 state 供下一步 --resume-state
+SEARCH_R1_SCENE=ecommerce uv run python sft.py \
+    --data datasets/ecommerce/train.jsonl --search-backend ecommerce \
+    --questions 60 --samples-per-question 4 --run-name ecom-sft-coldstart
+
+# 4. 训练：20 步 GRPO
 SEARCH_R1_SCENE=ecommerce uv run python train.py \
     --max-steps 20 --save-every 5 \
     --data datasets/ecommerce/train.jsonl \
     --search-backend ecommerce \
     --run-name ecom-r1-20step
 
-# 4. 评测：Base vs Step-20 各跑一次 70 题
+# 5. 评测：Base vs Step-20 各跑一次 70 题
 SEARCH_R1_SCENE=ecommerce \
 SEARCH_R1_EVAL_DATA=$PWD/datasets/ecommerce/dev.jsonl \
 uv run python eval.py --search-backend ecommerce \
@@ -137,6 +245,13 @@ SEARCH_R1_EVAL_DATA=$PWD/datasets/ecommerce/dev.jsonl \
 uv run python eval.py --search-backend ecommerce \
     --model-path 'trio://<你的-step-20-weights-路径>' \
     --output eval_result/ecom_eval_step20.jsonl
+
+# 6. 奖励项归因（纯离线，读上一步的评测文件）
+uv run python reward_ablation.py
+
+# 7. 部署压测（需要 GPU + vllm）
+uv run python bench_serving.py --backend server --concurrency 1 2 4 8 16
+uv run python bench_serving.py --backend hf --concurrency 1 2 4 8
 ```
 
 ### Wikipedia 场景（管线验证基线）
@@ -162,11 +277,13 @@ uv run python eval.py --search-backend wikipedia \
 | 指标 | 含义 |
 |---|---|
 | `em/macro` | 各数据源 Exact Match 的宏平均 |
+| `em/{single,policy,multihop}` | 按题型拆分的 EM（单跳 / 政策 / 多跳） |
 | `format/rate` | 输出格式合法率（电商场景 = Answer + Source 两行齐全） |
 | `citation/has_source` | 给出引用行的比例 |
 | `citation/source_retrieved` | 引用编号真实出现在本轮检索结果中的比例（防编造引用） |
 | `citation/source_gold` | 引用编号命中 gold docs 的比例（引对了来源） |
 | `rollout/search_calls` | 平均搜索次数（效率） |
+| `search/*` | 检索成功率 / 超时率 / 429 率 / 平均延迟 |
 
 ## 训练曲线
 

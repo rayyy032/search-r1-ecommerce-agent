@@ -35,6 +35,9 @@ class RolloutConfig:
     temperature: float = 1.0  # 控制采样随机性。
     top_p: float = 1.0  # 核采样的累积概率上限。
     seed: int = 42  # 采样使用的随机种子。
+    # 复合奖励权重；None 表示使用 reward.DEFAULT_WEIGHTS（线上配置）。
+    # 奖励项消融时传入按预设构造的 RewardWeights，实现单变量对照。
+    reward_weights: RewardWeights | None = None
 
 
 @dataclass
@@ -458,6 +461,6 @@ def rollout_batch(
 
     # 所有轨迹结束后先计算奖励，再按同题 group 计算中心化 advantage。
     for trajectory in trajectories:
-        score_trajectory(trajectory)
+        score_trajectory(trajectory, config.reward_weights)
     assign_group_advantages(trajectories)
     return trajectories

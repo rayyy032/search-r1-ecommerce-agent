@@ -1,0 +1,324 @@
+[
+  {
+    "name": "ecom_eval_base",
+    "n": 70,
+    "max_reward_drift_vs_saved": 0.0,
+    "terms": [
+      {
+        "component": "exact_match",
+        "trigger_rate": 0.42857142857142855,
+        "mean_contribution": 0.42857142857142855,
+        "std_contribution": 0.4948716593053935,
+        "P_trigger_given_em1": 1.0,
+        "P_trigger_given_em0": 0.0,
+        "phi_with_em": 1.0,
+        "absorbed_by_em": false
+      },
+      {
+        "component": "has_source",
+        "trigger_rate": 0.9857142857142858,
+        "mean_contribution": 0.09857142857142857,
+        "std_contribution": 0.011866605518454395,
+        "P_trigger_given_em1": 1.0,
+        "P_trigger_given_em0": 0.975,
+        "phi_with_em": 0.10425720702853739,
+        "absorbed_by_em": false
+      },
+      {
+        "component": "source_retrieved",
+        "trigger_rate": 0.9857142857142858,
+        "mean_contribution": 0.19714285714285715,
+        "std_contribution": 0.02373321103690879,
+        "P_trigger_given_em1": 1.0,
+        "P_trigger_given_em0": 0.975,
+        "phi_with_em": 0.10425720702853739,
+        "absorbed_by_em": false
+      },
+      {
+        "component": "source_gold",
+        "trigger_rate": 0.9285714285714286,
+        "mean_contribution": 0.18571428571428572,
+        "std_contribution": 0.05150787536377128,
+        "P_trigger_given_em1": 1.0,
+        "P_trigger_given_em0": 0.875,
+        "phi_with_em": 0.24019223070763068,
+        "absorbed_by_em": false
+      },
+      {
+        "component": "search_penalty",
+        "trigger_rate": 1.0,
+        "mean_contribution": -0.07214285714285715,
+        "std_contribution": 0.026234810960295656,
+        "P_trigger_given_em1": 1.0,
+        "P_trigger_given_em0": 1.0,
+        "phi_with_em": 0.0,
+        "absorbed_by_em": false
+      }
+    ],
+    "counterfactual": [
+      {
+        "preset": "em_only",
+        "mean_reward": 0.42857142857142855,
+        "delta_vs_full": -0.4092857142857143,
+        "kendall_tau_b_vs_full": 0.5515623875038174,
+        "value_changed": 70,
+        "order_changed_pairs": 455,
+        "flipped_pairs": 0,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "em_plus_format",
+        "mean_reward": 0.5271428571428572,
+        "delta_vs_full": -0.3107142857142856,
+        "kendall_tau_b_vs_full": 0.563905514689613,
+        "value_changed": 70,
+        "order_changed_pairs": 416,
+        "flipped_pairs": 0,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "no_citation",
+        "mean_reward": 0.35642857142857143,
+        "delta_vs_full": -0.48142857142857143,
+        "kendall_tau_b_vs_full": 0.576810512682474,
+        "value_changed": 69,
+        "order_changed_pairs": 171,
+        "flipped_pairs": 109,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "no_has_source",
+        "mean_reward": 0.7392857142857143,
+        "delta_vs_full": -0.09857142857142853,
+        "kendall_tau_b_vs_full": 0.6853002070393375,
+        "value_changed": 69,
+        "order_changed_pairs": 0,
+        "flipped_pairs": 0,
+        "constant_shift_only": true
+      },
+      {
+        "preset": "no_search_penalty",
+        "mean_reward": 0.91,
+        "delta_vs_full": 0.07214285714285718,
+        "kendall_tau_b_vs_full": 0.6067367575734678,
+        "value_changed": 70,
+        "order_changed_pairs": 276,
+        "flipped_pairs": 0,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "no_source_gold",
+        "mean_reward": 0.6521428571428571,
+        "delta_vs_full": -0.18571428571428572,
+        "kendall_tau_b_vs_full": 0.6035078962354664,
+        "value_changed": 65,
+        "order_changed_pairs": 132,
+        "flipped_pairs": 81,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "no_source_retrieved",
+        "mean_reward": 0.6407142857142857,
+        "delta_vs_full": -0.19714285714285718,
+        "kendall_tau_b_vs_full": 0.6853002070393375,
+        "value_changed": 69,
+        "order_changed_pairs": 0,
+        "flipped_pairs": 0,
+        "constant_shift_only": true
+      }
+    ],
+    "by_source": [
+      {
+        "data_source": "ecommerce_multihop",
+        "n": 39,
+        "em": 0.15384615384615385,
+        "source_gold": 0.9743589743589743,
+        "has_source": 1.0,
+        "mean_search_calls": 1.794871794871795
+      },
+      {
+        "data_source": "ecommerce_policy",
+        "n": 4,
+        "em": 0.25,
+        "source_gold": 1.0,
+        "has_source": 1.0,
+        "mean_search_calls": 1.0
+      },
+      {
+        "data_source": "ecommerce_single",
+        "n": 27,
+        "em": 0.8518518518518519,
+        "source_gold": 0.8518518518518519,
+        "has_source": 0.9629629629629629,
+        "mean_search_calls": 1.0
+      }
+    ],
+    "confusion_em_x_source_gold": {
+      "em1_gold1": 30,
+      "em1_gold0": 0,
+      "em0_gold1": 35,
+      "em0_gold0": 5
+    }
+  },
+  {
+    "name": "ecom_eval_step20",
+    "n": 70,
+    "max_reward_drift_vs_saved": 0.0,
+    "terms": [
+      {
+        "component": "exact_match",
+        "trigger_rate": 0.8857142857142857,
+        "mean_contribution": 0.8857142857142857,
+        "std_contribution": 0.318157963590287,
+        "P_trigger_given_em1": 1.0,
+        "P_trigger_given_em0": 0.0,
+        "phi_with_em": 1.0,
+        "absorbed_by_em": false
+      },
+      {
+        "component": "has_source",
+        "trigger_rate": 1.0,
+        "mean_contribution": 0.1,
+        "std_contribution": 0.0,
+        "P_trigger_given_em1": 1.0,
+        "P_trigger_given_em0": 1.0,
+        "phi_with_em": 0.0,
+        "absorbed_by_em": false
+      },
+      {
+        "component": "source_retrieved",
+        "trigger_rate": 1.0,
+        "mean_contribution": 0.2,
+        "std_contribution": 0.0,
+        "P_trigger_given_em1": 1.0,
+        "P_trigger_given_em0": 1.0,
+        "phi_with_em": 0.0,
+        "absorbed_by_em": false
+      },
+      {
+        "component": "source_gold",
+        "trigger_rate": 0.9285714285714286,
+        "mean_contribution": 0.18571428571428572,
+        "std_contribution": 0.05150787536377128,
+        "P_trigger_given_em1": 0.9838709677419355,
+        "P_trigger_given_em0": 0.5,
+        "phi_with_em": 0.5977625776640615,
+        "absorbed_by_em": false
+      },
+      {
+        "component": "search_penalty",
+        "trigger_rate": 1.0,
+        "mean_contribution": -0.07785714285714286,
+        "std_contribution": 0.02483619807244816,
+        "P_trigger_given_em1": 1.0,
+        "P_trigger_given_em0": 1.0,
+        "phi_with_em": 0.0,
+        "absorbed_by_em": false
+      }
+    ],
+    "counterfactual": [
+      {
+        "preset": "em_only",
+        "mean_reward": 0.8857142857142857,
+        "delta_vs_full": -0.4078571428571429,
+        "kendall_tau_b_vs_full": 0.2686950105871598,
+        "value_changed": 70,
+        "order_changed_pairs": 1004,
+        "flipped_pairs": 0,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "em_plus_format",
+        "mean_reward": 0.9857142857142858,
+        "delta_vs_full": -0.30785714285714283,
+        "kendall_tau_b_vs_full": 0.2686950105871598,
+        "value_changed": 70,
+        "order_changed_pairs": 1004,
+        "flipped_pairs": 0,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "no_citation",
+        "mean_reward": 0.8078571428571428,
+        "delta_vs_full": -0.48571428571428577,
+        "kendall_tau_b_vs_full": 0.600476894814316,
+        "value_changed": 70,
+        "order_changed_pairs": 49,
+        "flipped_pairs": 12,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "no_has_source",
+        "mean_reward": 1.1935714285714285,
+        "delta_vs_full": -0.10000000000000009,
+        "kendall_tau_b_vs_full": 0.6211180124223602,
+        "value_changed": 70,
+        "order_changed_pairs": 0,
+        "flipped_pairs": 0,
+        "constant_shift_only": true
+      },
+      {
+        "preset": "no_search_penalty",
+        "mean_reward": 1.3714285714285714,
+        "delta_vs_full": 0.07785714285714285,
+        "kendall_tau_b_vs_full": 0.30226968178921304,
+        "value_changed": 70,
+        "order_changed_pairs": 927,
+        "flipped_pairs": 0,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "no_source_gold",
+        "mean_reward": 1.1078571428571429,
+        "delta_vs_full": -0.18571428571428572,
+        "kendall_tau_b_vs_full": 0.600476894814316,
+        "value_changed": 65,
+        "order_changed_pairs": 49,
+        "flipped_pairs": 12,
+        "constant_shift_only": false
+      },
+      {
+        "preset": "no_source_retrieved",
+        "mean_reward": 1.0935714285714286,
+        "delta_vs_full": -0.19999999999999996,
+        "kendall_tau_b_vs_full": 0.6211180124223602,
+        "value_changed": 70,
+        "order_changed_pairs": 0,
+        "flipped_pairs": 0,
+        "constant_shift_only": true
+      }
+    ],
+    "by_source": [
+      {
+        "data_source": "ecommerce_multihop",
+        "n": 39,
+        "em": 0.8974358974358975,
+        "source_gold": 0.9743589743589743,
+        "has_source": 1.0,
+        "mean_search_calls": 1.9743589743589745
+      },
+      {
+        "data_source": "ecommerce_policy",
+        "n": 4,
+        "em": 1.0,
+        "source_gold": 1.0,
+        "has_source": 1.0,
+        "mean_search_calls": 1.0
+      },
+      {
+        "data_source": "ecommerce_single",
+        "n": 27,
+        "em": 0.8518518518518519,
+        "source_gold": 0.8518518518518519,
+        "has_source": 1.0,
+        "mean_search_calls": 1.037037037037037
+      }
+    ],
+    "confusion_em_x_source_gold": {
+      "em1_gold1": 61,
+      "em1_gold0": 1,
+      "em0_gold1": 4,
+      "em0_gold0": 4
+    }
+  }
+]

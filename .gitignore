@@ -11,6 +11,7 @@ __pycache__/
 swanlog/
 *.log
 ecommerce/qdrant_store/
+sft_runs/
 
 # Wiki 原始数据与生成的大文件（用 prepare_data.py 重新生成）
 datasets/raw/

@@ -57,6 +57,7 @@ import swanlab
 from tqdm import tqdm
 
 from data import shuffled_examples, take_batch
+from reward import REWARD_PRESETS, resolve_weights
 from rollout import RolloutConfig, Trajectory, rollout_batch
 from search import (
     SEARCH_BACKENDS,
@@ -554,6 +555,8 @@ def main(args: argparse.Namespace) -> None:
     )
 
     # 将命令行中的采样、搜索次数和轨迹长度限制集中成 rollout 配置。
+    reward_weights = resolve_weights(args.reward_config)
+    args.reward_weights_dict = reward_weights.to_dict()  # 一并写进 SwanLab 配置
     rollout_config = RolloutConfig(
         group_size=args.group_size,
         max_search_calls=args.max_search_calls,
@@ -565,6 +568,7 @@ def main(args: argparse.Namespace) -> None:
         temperature=args.temperature,
         top_p=args.top_p,
         seed=args.seed,
+        reward_weights=reward_weights,
     )
 
     # 每个训练 step 的所有 micro-batch 共享同一组 Adam 参数，并只 optim_step 一次。

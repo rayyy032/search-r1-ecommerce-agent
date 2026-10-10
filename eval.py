@@ -23,6 +23,7 @@ import pytrio as trio
 from tqdm import tqdm
 
 from data import SearchExample, load_examples
+from reward import REWARD_PRESETS, resolve_weights
 from rollout import RolloutConfig, Trajectory, rollout_batch
 from search import (
     SEARCH_BACKENDS,
@@ -126,6 +127,8 @@ def summary_record(
             args.search_model if args.search_backend == "deepseek" else None
         ),
         "evaluated_examples": len(trajectories),
+        "reward_config": args.reward_config,
+        "reward_weights": resolve_weights(args.reward_config).to_dict(),
         "metrics": metrics,
     }
 

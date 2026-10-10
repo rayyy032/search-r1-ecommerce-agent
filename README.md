@@ -249,10 +249,15 @@ uv run python eval.py --search-backend ecommerce \
 # 6. 奖励项归因（纯离线，读上一步的评测文件）
 uv run python reward_ablation.py
 
-# 7. 部署压测（需要 GPU + vllm）
+# 7. 部署压测（需要 GPU + vllm；没有本地 GPU 就用 kaggle_bench_serving.ipynb）
 uv run python bench_serving.py --backend server --concurrency 1 2 4 8 16
 uv run python bench_serving.py --backend hf --concurrency 1 2 4 8
 ```
+
+> **哪些脚本需要本地 GPU？** 只有 `bench_serving.py`。`train.py` / `sft.py` / `eval.py`
+> 只在本机做数据与轨迹编排，真正的训练和采样由远端 PyTRIO 服务执行，因此**不需要本地 GPU**
+> （但需要一个可用的 PyTRIO API key，以及本地的 Qdrant 索引）。
+> `bench_serving.py` 请用仓库里的 `kaggle_bench_serving.ipynb` 在 Kaggle T4 上跑。
 
 ### Wikipedia 场景（管线验证基线）
 

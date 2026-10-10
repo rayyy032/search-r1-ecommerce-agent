@@ -231,15 +231,43 @@ def run_offline_mode(args, prompts) -> list[dict]:
     return results
 
 
+def load_hf_model(model_name: str):
+    """加载 HF 权重，返回 (tokenizer, model)。
+
+    Qwen3.5-4B 在 HF 上注册的 pipeline_tag 是 `image-text-to-text`（多模态架构），
+    直接 `AutoModelForCausalLM` 会因架构不匹配而报错；这里按「多模态 → 因果 LM」
+    的顺序逐级回退，并兼容 transformers 4.x(`torch_dtype`) / 5.x(`dtype`) 两种参数名。
+    任何一级成功即返回，全部失败才抛出最后一个错误。
+    """
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    candidates = []
+    try:  # transformers 新版本才有 ImageTextToText 基类
+        from transformers import AutoModelForImageTextToText
+
+        candidates.append(AutoModelForImageTextToText)
+    except ImportError:
+        pass
+    candidates.append(AutoModelForCausalLM)
+    last_error: Exception | None = None
+    for model_cls in candidates:
+        for dtype_kwarg in ("dtype", "torch_dtype"):
+            try:
+                model = model_cls.from_pretrained(
+                    model_name, device_map="auto", trust_remote_code=True, **{dtype_kwarg: "auto"}
+                )
+                return tokenizer, model.eval()
+            except Exception as error:  # 记录后在下一组合重试
+                last_error = error
+    raise RuntimeError(f"加载 {model_name} 失败（已尝试 {[c.__name__ for c in candidates]}）：{last_error}")
+
+
 def run_hf_mode(args, prompts) -> list[dict]:
     """transformers.generate 批量基线，量化部署优化的收益。"""
     import torch
-    from transformers import AutoModelForCausalLM, AutoTokenizer
 
-    tokenizer = AutoTokenizer.from_pretrained(args.model)
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model, torch_dtype="auto", device_map="auto"
-    ).eval()
+    tokenizer, model = load_hf_model(args.model)
     results: list[dict] = []
     offset = 0
     for concurrency in args.concurrency:

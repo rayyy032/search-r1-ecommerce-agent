@@ -503,6 +503,14 @@ def parse_args() -> argparse.Namespace:
         help="SwanLab 实验名称，同时作为 checkpoint 名称前缀",
     )
     parser.add_argument(
+        "--reward-config",
+        default="full",
+        help=(
+            "复合奖励的预设名，用于奖励项消融；默认 full 即线上配置。"
+            "可选项见 reward.REWARD_PRESETS，例如 no_source（把引用类权重全置 0）。"
+        ),
+    )
+    parser.add_argument(
         "--swanlab-project",
         default="agentic-rl-lab-search-r1",
         help="SwanLab 项目名称",

@@ -660,8 +660,14 @@ def create_search_client(
     *,
     model: str = "deepseek-v4-flash",
     timeout: float | None = None,
+    top_k: int | None = None,
 ) -> SearchClient:
-    """按名称创建搜索后端；三个后端共用同一套 rollout 接口。"""
+    """按名称创建搜索后端；三个后端共用同一套 rollout 接口。
+
+    top_k 仅对 ecommerce 后端生效（本地 Qdrant 每次检索返回的文档条数）；其余后端忽略。
+    把它做成参数是为了做「检索器召回」单变量对照：固定策略、只改检索条数，
+    验证残留错题到底是策略到顶还是检索器召回不足。
+    """
     resolved_timeout = resolve_search_timeout(backend, timeout)
     if backend == "deepseek":
         return DeepSeekSearchClient.from_env(
@@ -677,6 +683,8 @@ def create_search_client(
             timeout=resolved_timeout,
         )
     if backend == "ecommerce":
+        if top_k is not None:
+            return EcommerceQdrantClient(timeout=resolved_timeout, top_k=top_k)
         return EcommerceQdrantClient(timeout=resolved_timeout)
     raise ValueError(f"不支持的搜索后端: {backend}")
 

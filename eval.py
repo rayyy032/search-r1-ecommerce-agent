@@ -129,6 +129,7 @@ def summary_record(
         "evaluated_examples": len(trajectories),
         "reward_config": args.reward_config,
         "reward_weights": resolve_weights(args.reward_config).to_dict(),
+        "search_top_k": args.top_k if args.top_k is not None else "default(3)",
         "metrics": metrics,
     }
 
@@ -193,6 +194,13 @@ def parse_args() -> argparse.Namespace:
         help="单次搜索的超时秒数；默认 deepseek=60、zhihu=15",
     )
     parser.add_argument(
+        "--top-k",
+        type=int,
+        default=None,
+        help="ecommerce 后端每次检索返回的文档条数；默认 3（线上配置）。"
+        "提到 8 可做「检索器召回」单变量对照，验证残留错题是策略到顶还是召回不足。",
+    )
+    parser.add_argument(
         "--max-assistant-turns",
         type=int,
         default=6,
@@ -234,6 +242,14 @@ def parse_args() -> argparse.Namespace:
         default=42,
         help="评测 rollout 使用的随机种子",
     )
+    parser.add_argument(
+        "--reward-config",
+        default="full",
+        help=(
+            "复合奖励的预设名，用于奖励项消融对照；默认 full 即线上配置。"
+            "可选项见 reward.REWARD_PRESETS。"
+        ),
+    )
     return parser.parse_args()
 
 
@@ -272,6 +288,7 @@ def main(args: argparse.Namespace) -> None:
         Path(__file__).resolve().parent / ".env",
         model=args.search_model,
         timeout=args.search_timeout,
+        top_k=args.top_k,
     )
     config = RolloutConfig(
         # 每道题只生成一条确定的评测轨迹，不需要训练阶段的 GRPO group。
